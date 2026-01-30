@@ -1,22 +1,18 @@
 import { notFound } from 'next/navigation'
 import Image from 'next/image'
 import Link from 'next/link'
-import { getProjectBySlug, getProjects } from '@/lib/notion'
+import { getProjectBySlug, getProjects } from '@/lib/projects'
 import Footer from '@/components/Footer'
 
-export const revalidate = 60
-
-// Genera le pagine statiche per tutti i progetti
-export async function generateStaticParams() {
-  const projects = await getProjects()
+export function generateStaticParams() {
+  const projects = getProjects()
   return projects.map((project) => ({
     slug: project.slug,
   }))
 }
 
-// Metadata dinamica
-export async function generateMetadata({ params }: { params: { slug: string } }) {
-  const project = await getProjectBySlug(params.slug)
+export function generateMetadata({ params }: { params: { slug: string } }) {
+  const project = getProjectBySlug(params.slug)
   if (!project) return { title: 'Progetto non trovato' }
 
   return {
@@ -25,8 +21,8 @@ export async function generateMetadata({ params }: { params: { slug: string } })
   }
 }
 
-export default async function ProjectPage({ params }: { params: { slug: string } }) {
-  const project = await getProjectBySlug(params.slug)
+export default function ProjectPage({ params }: { params: { slug: string } }) {
+  const project = getProjectBySlug(params.slug)
 
   if (!project) {
     notFound()
@@ -36,7 +32,6 @@ export default async function ProjectPage({ params }: { params: { slug: string }
     <main className="min-h-screen">
       {/* Hero */}
       <section className="relative h-[80vh] flex items-end overflow-hidden">
-        {/* Background */}
         <div className="absolute inset-0">
           {project.videoUrl ? (
             <iframe
@@ -57,7 +52,6 @@ export default async function ProjectPage({ params }: { params: { slug: string }
           <div className="absolute inset-0 bg-gradient-to-t from-black via-black/30 to-transparent" />
         </div>
 
-        {/* Content */}
         <div className="relative z-10 w-full px-8 md:px-16 pb-16">
           <span className="text-xs tracking-[0.3em] text-white/60 uppercase">
             {project.category}
@@ -68,7 +62,7 @@ export default async function ProjectPage({ params }: { params: { slug: string }
         </div>
       </section>
 
-      {/* Content */}
+      {/* Description */}
       <section className="py-24 px-8 md:px-16">
         <div className="max-w-4xl">
           {project.description && (
@@ -77,7 +71,7 @@ export default async function ProjectPage({ params }: { params: { slug: string }
             </p>
           )}
 
-          {/* Video embed */}
+          {/* Video principale */}
           {project.videoUrl && (
             <div className="mt-16 aspect-video bg-neutral-900 rounded-lg overflow-hidden">
               <iframe
@@ -91,11 +85,53 @@ export default async function ProjectPage({ params }: { params: { slug: string }
         </div>
       </section>
 
+      {/* Gallery */}
+      {project.gallery && project.gallery.length > 0 && (
+        <section className="px-8 md:px-16 pb-24">
+          <div className="max-w-7xl mx-auto">
+            <h2 className="text-xs tracking-[0.3em] text-white/60 uppercase mb-8">
+              Gallery
+            </h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              {project.gallery.map((item, index) => (
+                <div key={index} className="relative overflow-hidden rounded-lg bg-neutral-900">
+                  {item.type === 'image' ? (
+                    <div className="relative aspect-video">
+                      <Image
+                        src={item.url}
+                        alt={item.caption || `${project.title} - ${index + 1}`}
+                        fill
+                        className="object-cover hover:scale-105 transition-transform duration-500"
+                      />
+                    </div>
+                  ) : item.type === 'vimeo' || item.type === 'youtube' ? (
+                    <div className="aspect-video">
+                      <iframe
+                        src={item.type === 'youtube'
+                          ? item.url.replace('watch?v=', 'embed/')
+                          : item.url
+                        }
+                        className="w-full h-full"
+                        allow="autoplay; fullscreen; picture-in-picture"
+                        style={{ border: 'none' }}
+                      />
+                    </div>
+                  ) : null}
+                  {item.caption && (
+                    <p className="p-4 text-sm text-white/60">{item.caption}</p>
+                  )}
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
+
       {/* Back link */}
       <section className="px-8 md:px-16 pb-24">
         <Link
           href="/progetti"
-          className="inline-flex items-center gap-2 text-muted hover:text-white transition-colors"
+          className="inline-flex items-center gap-2 text-[#737373] hover:text-white transition-colors"
         >
           <span>←</span>
           Tutti i progetti

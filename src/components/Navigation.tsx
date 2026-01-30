@@ -5,9 +5,9 @@ import Link from 'next/link'
 import { motion, AnimatePresence } from 'framer-motion'
 
 const navLinks = [
-  { href: '/progetti', label: 'Progetti' },
+  { href: '/progetti', label: 'Proyectos' },
   { href: '/studio', label: 'Studio' },
-  { href: '/contatti', label: 'Contatti' },
+  { href: '/contatti', label: 'Contacto' },
 ]
 
 export default function Navigation() {
@@ -22,7 +22,7 @@ export default function Navigation() {
             href="/"
             className="text-white text-xl font-medium tracking-tight hover:opacity-70 transition-opacity"
           >
-            PORTFOLIO
+            MANUEL GUILLIN
           </Link>
 
           {/* Desktop Links */}

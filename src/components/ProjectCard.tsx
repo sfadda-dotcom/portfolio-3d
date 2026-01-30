@@ -3,7 +3,7 @@
 import { motion } from 'framer-motion'
 import Link from 'next/link'
 import Image from 'next/image'
-import type { Project } from '@/lib/notion'
+import type { Project } from '@/lib/projects'
 
 interface ProjectCardProps {
   project: Project

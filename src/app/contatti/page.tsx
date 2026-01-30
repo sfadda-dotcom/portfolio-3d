@@ -1,8 +1,8 @@
 import Footer from '@/components/Footer'
 
 export const metadata = {
-  title: 'Contatti | Portfolio',
-  description: 'Contattami per collaborazioni e progetti',
+  title: 'Contacto | Manuel Guillin',
+  description: 'Contacto para colaboraciones y proyectos',
 }
 
 export default function ContactPage() {
@@ -12,10 +12,10 @@ export default function ContactPage() {
         {/* Header */}
         <header className="mb-24">
           <h1 className="text-5xl md:text-7xl font-light tracking-tight">
-            Contatti
+            Contacto
           </h1>
-          <p className="mt-8 text-xl text-muted max-w-2xl">
-            Hai un progetto in mente? Parliamone.
+          <p className="mt-8 text-xl text-white/60 max-w-2xl">
+            ¿Tenés un proyecto en mente? Hablemos.
           </p>
         </header>
 
@@ -24,48 +24,72 @@ export default function ContactPage() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-16">
             {/* Email */}
             <div>
-              <h2 className="text-xs tracking-[0.3em] text-muted uppercase mb-4">
+              <h2 className="text-xs tracking-[0.3em] text-white/60 uppercase mb-4">
                 Email
               </h2>
               <a
-                href="mailto:info@example.com"
+                href="mailto:meguillin@gmail.com"
                 className="text-2xl font-light hover:opacity-70 transition-opacity"
               >
-                info@example.com
+                meguillin@gmail.com
               </a>
             </div>
 
             {/* Social */}
             <div>
-              <h2 className="text-xs tracking-[0.3em] text-muted uppercase mb-4">
+              <h2 className="text-xs tracking-[0.3em] text-white/60 uppercase mb-4">
                 Social
               </h2>
-              <div className="flex flex-col gap-2">
+              <div className="flex flex-col gap-3">
                 <a
-                  href="#"
+                  href="https://instagram.com/unamleunam"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-lg hover:opacity-70 transition-opacity"
+                  className="text-lg hover:opacity-70 transition-opacity flex items-center gap-2"
                 >
-                  Instagram
+                  <span>Instagram</span>
+                  <span className="text-white/40">@unamleunam</span>
                 </a>
                 <a
-                  href="#"
+                  href="https://vimeo.com/unamleunam"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-lg hover:opacity-70 transition-opacity"
                 >
                   Vimeo
                 </a>
-                <a
-                  href="#"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-lg hover:opacity-70 transition-opacity"
-                >
-                  LinkedIn
-                </a>
               </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Reels */}
+        <section className="mb-24">
+          <h2 className="text-xs tracking-[0.3em] text-white/60 uppercase mb-8">
+            Reels
+          </h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div>
+              <div className="aspect-video bg-neutral-900 rounded-lg overflow-hidden">
+                <iframe
+                  src="https://player.vimeo.com/video/535480724"
+                  className="w-full h-full"
+                  allow="autoplay; fullscreen; picture-in-picture"
+                  style={{ border: 'none' }}
+                />
+              </div>
+              <p className="mt-3 text-sm text-white/60">2D Reel</p>
+            </div>
+            <div>
+              <div className="aspect-video bg-neutral-900 rounded-lg overflow-hidden">
+                <iframe
+                  src="https://player.vimeo.com/video/298254408"
+                  className="w-full h-full"
+                  allow="autoplay; fullscreen; picture-in-picture"
+                  style={{ border: 'none' }}
+                />
+              </div>
+              <p className="mt-3 text-sm text-white/60">3D Reel</p>
             </div>
           </div>
         </section>
@@ -73,13 +97,13 @@ export default function ContactPage() {
         {/* CTA */}
         <section className="py-24 border-t border-neutral-800">
           <p className="text-3xl md:text-4xl font-light leading-relaxed">
-            Pronto a creare qualcosa di straordinario insieme?
+            ¿Listo para crear algo extraordinario juntos?
           </p>
           <a
-            href="mailto:info@example.com?subject=Nuovo progetto"
+            href="mailto:meguillin@gmail.com?subject=Nuevo proyecto"
             className="inline-block mt-8 px-8 py-4 bg-white text-black text-sm tracking-wide hover:bg-white/90 transition-colors"
           >
-            Iniziamo
+            Empecemos
           </a>
         </section>
       </div>

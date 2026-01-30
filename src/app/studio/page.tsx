@@ -1,9 +1,35 @@
 import Footer from '@/components/Footer'
 
 export const metadata = {
-  title: 'Studio | Portfolio',
-  description: 'Chi sono e cosa faccio - Motion Designer 3D',
+  title: 'Studio | Manuel Guillin',
+  description: '2D/3D Motion Graphics Designer · Videomapping · VJing',
 }
+
+const software = [
+  '3Ds Max',
+  'Cinema 4D',
+  'After Effects',
+  'Premiere',
+  'Houdini',
+  'Resolume Arena',
+  'Vvvv',
+  'Touch Designer',
+  'Mad Mapper',
+]
+
+const experience = [
+  { company: 'Legion Creativa', role: 'Motion Designer', period: '2017 - Presente' },
+  { company: 'Freelance', role: '2D/3D Motion Graphics', period: '2014 - Presente' },
+  { company: 'BNN Costanera', role: 'VJ Residente', period: '2017 - 2020' },
+  { company: 'Gino Club', role: 'VJ Residente', period: '2015 - 2017' },
+  { company: 'Rabbit', role: 'VJ Residente', period: '2013 - 2015' },
+]
+
+const studies = [
+  { title: 'Animación 3D FX', institution: 'Image Campus' },
+  { title: 'Artes Electrónicas', institution: 'UNTREF' },
+  { title: 'Diseño Gráfico', institution: 'UBA' },
+]
 
 export default function StudioPage() {
   return (
@@ -12,64 +38,100 @@ export default function StudioPage() {
         {/* Header */}
         <header className="mb-24">
           <h1 className="text-5xl md:text-7xl font-light tracking-tight">
-            Studio
+            Manuel Guillin
           </h1>
+          <p className="mt-4 text-xl text-white/60">
+            2D/3D Motion Graphics Designer · Videomapping · VJing
+          </p>
         </header>
 
         {/* Bio */}
         <section className="mb-24">
           <p className="text-2xl md:text-3xl font-light leading-relaxed text-white/90">
-            Motion designer specializzato in animazione 3D, contenuti audiovisivi
-            e esperienze digitali immersive.
+            Toda nuestra vida es movimiento. Ni la sociedad, ni la naturaleza se
+            quedan paradas en ningún momento. Todo se mueve y este movimiento tiene un fin.
           </p>
-          <p className="mt-8 text-lg text-muted leading-relaxed">
-            Con una passione per la fusione tra arte e tecnologia, creo contenuti
-            visivi che comunicano, emozionano e lasciano il segno. Dall&apos;ideazione
-            alla realizzazione, ogni progetto è un viaggio creativo unico.
+          <p className="mt-8 text-lg text-white/60 leading-relaxed">
+            Bajo las tres dimensiones que rigen el mundo físico, manipulamos la cuarta
+            intangible, el tiempo. Creando así la ilusión de movimiento.
           </p>
         </section>
 
-        {/* Services */}
+        {/* Services / Disciplines */}
         <section className="mb-24">
-          <h2 className="text-xs tracking-[0.3em] text-muted uppercase mb-8">
-            Servizi
+          <h2 className="text-xs tracking-[0.3em] text-white/60 uppercase mb-8">
+            Disciplinas
           </h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            {[
-              {
-                title: 'Motion Design',
-                description: 'Animazioni 2D e 3D per brand, advertising e contenuti digitali.',
-              },
-              {
-                title: '3D Animation',
-                description: 'Modellazione, texturing e animazione di scene e personaggi.',
-              },
-              {
-                title: 'Visual Effects',
-                description: 'Compositing, color grading e post-produzione video.',
-              },
-              {
-                title: 'Art Direction',
-                description: 'Direzione artistica per progetti audiovisivi e campagne.',
-              },
-            ].map((service) => (
-              <div key={service.title} className="border-l border-neutral-800 pl-6">
-                <h3 className="text-xl font-light mb-2">{service.title}</h3>
-                <p className="text-muted">{service.description}</p>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div className="border-l border-neutral-800 pl-6">
+              <h3 className="text-xl font-light mb-2">2D/3D Motion Graphics</h3>
+              <p className="text-white/60">
+                Colores, formas, texturas, sentimientos, son cruciales para la comunicación.
+              </p>
+            </div>
+            <div className="border-l border-neutral-800 pl-6">
+              <h3 className="text-xl font-light mb-2">Videomapping</h3>
+              <p className="text-white/60">
+                Todo lugar tiene una historia, todo es un lienzo a completar.
+              </p>
+            </div>
+            <div className="border-l border-neutral-800 pl-6">
+              <h3 className="text-xl font-light mb-2">VJing</h3>
+              <p className="text-white/60">
+                Escuchando la luz. El arte de intensificar sensaciones brindadas por la música.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        {/* Software */}
+        <section className="mb-24">
+          <h2 className="text-xs tracking-[0.3em] text-white/60 uppercase mb-8">
+            Software
+          </h2>
+          <div className="flex flex-wrap gap-3">
+            {software.map((tool) => (
+              <span
+                key={tool}
+                className="px-4 py-2 bg-neutral-900 text-white/80 text-sm rounded-full"
+              >
+                {tool}
+              </span>
+            ))}
+          </div>
+        </section>
+
+        {/* Experience */}
+        <section className="mb-24">
+          <h2 className="text-xs tracking-[0.3em] text-white/60 uppercase mb-8">
+            Experiencia
+          </h2>
+          <div className="space-y-6">
+            {experience.map((exp) => (
+              <div key={`${exp.company}-${exp.period}`} className="flex justify-between items-baseline border-b border-neutral-800 pb-4">
+                <div>
+                  <h3 className="text-lg font-light">{exp.company}</h3>
+                  <p className="text-sm text-white/60">{exp.role}</p>
+                </div>
+                <span className="text-sm text-white/40">{exp.period}</span>
               </div>
             ))}
           </div>
         </section>
 
-        {/* Experience / Clients */}
+        {/* Studies */}
         <section className="mb-24">
-          <h2 className="text-xs tracking-[0.3em] text-muted uppercase mb-8">
-            Clienti & Collaborazioni
+          <h2 className="text-xs tracking-[0.3em] text-white/60 uppercase mb-8">
+            Estudios
           </h2>
-          <p className="text-muted">
-            Brand, agenzie e studi con cui ho avuto il piacere di collaborare.
-          </p>
-          {/* Aggiungi loghi o nomi clienti qui */}
+          <div className="space-y-4">
+            {studies.map((study) => (
+              <div key={study.title} className="flex justify-between items-baseline">
+                <h3 className="text-lg font-light">{study.title}</h3>
+                <span className="text-sm text-white/60">{study.institution}</span>
+              </div>
+            ))}
+          </div>
         </section>
       </div>
 

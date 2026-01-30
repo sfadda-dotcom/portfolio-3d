@@ -1,9 +1,8 @@
 import Link from 'next/link'
 
 const socialLinks = [
-  { label: 'Instagram', href: '#' },
-  { label: 'Vimeo', href: '#' },
-  { label: 'LinkedIn', href: '#' },
+  { label: 'Instagram', href: 'https://instagram.com/unamleunam' },
+  { label: 'Vimeo', href: 'https://vimeo.com/unamleunam' },
 ]
 
 export default function Footer() {
@@ -14,8 +13,8 @@ export default function Footer() {
       <div className="max-w-7xl mx-auto">
         <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-8">
           {/* Copyright */}
-          <div className="text-sm text-muted">
-            © {currentYear} Portfolio. Tutti i diritti riservati.
+          <div className="text-sm text-white/40">
+            © {currentYear} Manuel Guillin. Todos los derechos reservados.
           </div>
 
           {/* Social Links */}
@@ -26,7 +25,7 @@ export default function Footer() {
                 href={link.href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-sm text-muted hover:text-white transition-colors"
+                className="text-sm text-white/40 hover:text-white transition-colors"
               >
                 {link.label}
               </a>
@@ -35,10 +34,10 @@ export default function Footer() {
 
           {/* Contact */}
           <a
-            href="mailto:info@example.com"
-            className="text-sm text-muted hover:text-white transition-colors"
+            href="mailto:meguillin@gmail.com"
+            className="text-sm text-white/40 hover:text-white transition-colors"
           >
-            info@example.com
+            meguillin@gmail.com
           </a>
         </div>
       </div>

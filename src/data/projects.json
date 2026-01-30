@@ -1,0 +1,50 @@
+[
+  {
+    "id": "1",
+    "slug": "motion-graphics-reel",
+    "title": "Traigámoslo a la vida",
+    "category": "2D/3D Motion Graphics",
+    "description": "Toda nuestra vida es movimiento. Ni la sociedad, ni la naturaleza se quedan paradas en ningún momento. Todo se mueve y este movimiento tiene un fin. Bajo las tres dimensiones que rigen el mundo físico, manipulamos la cuarta intangible, el tiempo. Creando así la ilusión de movimiento.",
+    "thumbnail": "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=1200&q=80",
+    "videoUrl": "https://player.vimeo.com/video/535480724",
+    "gallery": [],
+    "featured": true,
+    "order": 1
+  },
+  {
+    "id": "2",
+    "slug": "vjing",
+    "title": "Escuchando la luz",
+    "category": "VJing",
+    "description": "Con el avance de la tecnología la vida se ha transformado, permitiéndonos encontrar nuevas formas de expresión en el terreno artístico hasta lo más inimaginado. Integración de sonidos generando imágenes, movimientos captados por sensores, generar nuevos climas, contar un relato. El arte del VJing es intensificar sensaciones brindadas por su inseparable compañero, la música.",
+    "thumbnail": "https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=1200&q=80",
+    "videoUrl": null,
+    "gallery": [],
+    "featured": true,
+    "order": 2
+  },
+  {
+    "id": "3",
+    "slug": "videomapping",
+    "title": "Paredes que hablan",
+    "category": "Videomapping",
+    "description": "Todo lugar tiene una historia, todo es un lienzo a completar. Como modernas sombras chinas, reflejamos historias sobre edificios para personificar su pasado, presente y futuro.",
+    "thumbnail": "https://images.unsplash.com/photo-1504384308090-c894fdcc538d?w=1200&q=80",
+    "videoUrl": null,
+    "gallery": [],
+    "featured": true,
+    "order": 3
+  },
+  {
+    "id": "4",
+    "slug": "3d-reel",
+    "title": "3D Animation Reel",
+    "category": "2D/3D Motion Graphics",
+    "description": "Colores, formas, texturas, sentimientos, son cruciales para la comunicación.",
+    "thumbnail": "https://images.unsplash.com/photo-1633356122544-f134324a6cee?w=1200&q=80",
+    "videoUrl": "https://player.vimeo.com/video/298254408",
+    "gallery": [],
+    "featured": false,
+    "order": 4
+  }
+]
