@@ -6,7 +6,7 @@ const isNotionConfigured =
   process.env.NOTION_API_KEY && process.env.NOTION_DATABASE_ID
 
 // Inizializza il client Notion solo se configurato
-const notion = isNotionConfigured
+const notion: Client | null = isNotionConfigured
   ? new Client({ auth: process.env.NOTION_API_KEY })
   : null
 

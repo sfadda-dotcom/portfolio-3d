@@ -36,6 +36,6 @@ export function getProjectBySlug(slug: string): Project | null {
 }
 
 export function getCategories(): string[] {
-  const categories = [...new Set(projects.map((p) => p.category))]
+  const categories = Array.from(new Set(projects.map((p) => p.category)))
   return categories.filter(Boolean)
 }
