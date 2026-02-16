@@ -92,7 +92,7 @@ export default async function ProjectPage({ params }: { params: { slug: string }
         <section className="px-8 md:px-16 pb-24">
           <div className="max-w-7xl mx-auto">
             <h2 className="text-xs tracking-[0.3em] text-white/60 uppercase mb-8">
-              Gallery
+              Galería
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               {project.gallery.map((item, index) => (

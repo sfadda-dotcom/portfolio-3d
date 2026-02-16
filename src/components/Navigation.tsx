@@ -22,7 +22,8 @@ export default function Navigation() {
       <header className="fixed top-0 left-0 right-0 z-50">
         {/* White bar background on hover */}
         <nav className="group/nav relative">
-          <div className="absolute inset-0 bg-white/0 group-hover/nav:bg-white transition-colors duration-300" />
+          {/* Default: subtle dark gradient for readability. Hover: solid white bar */}
+          <div className="absolute inset-0 bg-gradient-to-b from-black/50 to-transparent group-hover/nav:from-white group-hover/nav:to-white transition-all duration-300" />
           <div className="relative flex items-center justify-between px-8 py-5">
             <Link
               href="/"
