@@ -4,7 +4,7 @@ import NavigationWrapper from '@/components/NavigationWrapper'
 
 export const metadata: Metadata = {
   title: 'MANUEL GUILLIN',
-  description: 'Portfolio di motion design 3D, animazione e contenuti audiovisivi',
+  description: 'Portfolio de motion design 3D, animación y contenido audiovisual',
 }
 
 export default function RootLayout({
@@ -13,7 +13,7 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="it">
+    <html lang="es">
       <body className="antialiased">
         <NavigationWrapper />
         {children}

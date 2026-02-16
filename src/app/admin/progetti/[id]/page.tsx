@@ -119,7 +119,7 @@ export default function EditProject() {
   if (loading || !project) {
     return (
       <div className="min-h-screen flex items-center justify-center">
-        <p className="text-[#737373]">Caricamento...</p>
+        <p className="text-[#737373]">Cargando...</p>
       </div>
     )
   }
@@ -142,7 +142,7 @@ export default function EditProject() {
           </div>
           <div className="flex items-center gap-3">
             {saved && (
-              <span className="text-xs text-green-400">Salvato ✓</span>
+              <span className="text-xs text-green-400">Guardado ✓</span>
             )}
             <button
               onClick={handleSave}
@@ -150,7 +150,7 @@ export default function EditProject() {
               className="text-sm bg-white text-black px-4 py-1.5 rounded font-medium
                          hover:bg-white/90 transition-colors disabled:opacity-50"
             >
-              {saving ? 'Salvando...' : 'Salva'}
+              {saving ? 'Guardando...' : 'Guardar'}
             </button>
           </div>
         </div>
@@ -174,13 +174,13 @@ export default function EditProject() {
                     onClick={() => fileInputRef.current?.click()}
                     className="text-xs bg-white text-black px-3 py-1.5 rounded"
                   >
-                    Cambia immagine
+                    Cambiar imagen
                   </button>
                   <button
                     onClick={() => updateField('thumbnail', '')}
                     className="text-xs bg-red-500/80 text-white px-3 py-1.5 rounded"
                   >
-                    Rimuovi
+                    Eliminar
                   </button>
                 </div>
               </div>
@@ -191,7 +191,7 @@ export default function EditProject() {
                            hover:border-white/20 flex items-center justify-center transition-colors"
               >
                 <span className="text-sm text-[#737373]">
-                  {uploading ? 'Caricamento...' : 'Clicca per caricare un\'immagine'}
+                  {uploading ? 'Subiendo...' : 'Clic para subir una imagen'}
                 </span>
               </button>
             )}
@@ -212,7 +212,7 @@ export default function EditProject() {
               type="url"
               value={project.thumbnail}
               onChange={(e) => updateField('thumbnail', e.target.value)}
-              placeholder="...oppure incolla un URL"
+              placeholder="...o pega una URL"
               className="w-full bg-white/5 border border-white/10 rounded px-3 py-1.5 text-xs
                          focus:outline-none focus:border-white/30 transition-colors text-[#737373]"
             />
@@ -222,7 +222,7 @@ export default function EditProject() {
         {/* Title & Slug */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div>
-            <label className="block text-xs text-[#737373] mb-1.5">Titolo</label>
+            <label className="block text-xs text-[#737373] mb-1.5">Título</label>
             <input
               type="text"
               value={project.title}
@@ -295,7 +295,7 @@ export default function EditProject() {
 
         {/* Description */}
         <div>
-          <label className="block text-xs text-[#737373] mb-1.5">Descrizione</label>
+          <label className="block text-xs text-[#737373] mb-1.5">Descripción</label>
           <textarea
             value={project.description}
             onChange={(e) => updateField('description', e.target.value)}
@@ -344,7 +344,7 @@ export default function EditProject() {
               }`}
             />
           </button>
-          <span className="text-sm">Mostra in homepage (Featured)</span>
+          <span className="text-sm">Mostrar en homepage (Featured)</span>
         </div>
 
         {/* Gallery */}
@@ -356,7 +356,7 @@ export default function EditProject() {
                 onClick={() => galleryInputRef.current?.click()}
                 className="text-xs bg-white/5 hover:bg-white/10 border border-white/10 px-3 py-1 rounded transition-colors"
               >
-                + Immagine
+                + Imagen
               </button>
               <button
                 onClick={handleAddGalleryVideo}
@@ -399,14 +399,14 @@ export default function EditProject() {
                       onClick={() => handleRemoveGalleryItem(index)}
                       className="text-xs text-red-400 hover:text-red-300"
                     >
-                      Rimuovi
+                      Eliminar
                     </button>
                   </div>
                   <input
                     type="text"
                     value={item.caption || ''}
                     onChange={(e) => handleUpdateGalleryCaption(index, e.target.value)}
-                    placeholder="Didascalia..."
+                    placeholder="Descripción..."
                     className="w-full bg-transparent border-t border-white/5 px-2 py-1 text-xs
                                focus:outline-none text-[#737373]"
                   />
@@ -415,7 +415,7 @@ export default function EditProject() {
             </div>
           ) : (
             <div className="text-center py-8 border border-dashed border-white/10 rounded-lg">
-              <p className="text-xs text-[#737373]">Nessun elemento nella gallery</p>
+              <p className="text-xs text-[#737373]">Sin elementos en la galería</p>
             </div>
           )}
         </section>
@@ -426,7 +426,7 @@ export default function EditProject() {
             onClick={() => router.push('/admin')}
             className="text-sm text-[#737373] hover:text-white transition-colors"
           >
-            ← Torna alla dashboard
+            ← Volver al dashboard
           </button>
           <button
             onClick={handleSave}
@@ -434,7 +434,7 @@ export default function EditProject() {
             className="text-sm bg-white text-black px-6 py-2 rounded font-medium
                        hover:bg-white/90 transition-colors disabled:opacity-50"
           >
-            {saving ? 'Salvando...' : 'Salva modifiche'}
+            {saving ? 'Guardando...' : 'Guardar cambios'}
           </button>
         </div>
       </main>

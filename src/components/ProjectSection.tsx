@@ -78,7 +78,7 @@ export default function ProjectSection({ project, index }: ProjectSectionProps) 
             href={`/progetti/${project.slug}`}
             className="inline-flex items-center gap-2 mt-8 text-sm tracking-wide text-white/80 hover:text-white transition-colors group/link"
           >
-            Scopri il progetto
+            Ver proyecto
             <span className="group-hover/link:translate-x-1 transition-transform">→</span>
           </Link>
         </motion.div>

@@ -25,7 +25,7 @@ export default function AdminDashboard() {
         setAllProjects(await res.json())
       }
     } catch (err) {
-      console.error('Errore nel caricamento:', err)
+      console.error('Error al cargar:', err)
     } finally {
       setLoading(false)
     }
@@ -44,7 +44,7 @@ export default function AdminDashboard() {
   }
 
   async function handleDelete(id: string, title: string) {
-    if (!confirm(`Eliminare "${title}"?`)) return
+    if (!confirm(`¿Eliminar "${title}"?`)) return
     setSaving(true)
     try {
       await fetch(`/api/admin/projects?id=${id}`, { method: 'DELETE' })
@@ -172,7 +172,7 @@ export default function AdminDashboard() {
   if (loading) {
     return (
       <div className="min-h-screen flex items-center justify-center">
-        <p className="text-[#737373]">Caricamento...</p>
+        <p className="text-[#737373]">Cargando...</p>
       </div>
     )
   }
@@ -185,7 +185,7 @@ export default function AdminDashboard() {
           <div className="flex items-center gap-4">
             <h1 className="text-lg font-medium">Portfolio Admin</h1>
             {saving && (
-              <span className="text-xs text-[#737373] animate-pulse">Salvando...</span>
+              <span className="text-xs text-[#737373] animate-pulse">Guardando...</span>
             )}
           </div>
           <div className="flex items-center gap-3">

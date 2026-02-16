@@ -15,11 +15,11 @@ export async function generateStaticParams() {
 
 export async function generateMetadata({ params }: { params: { slug: string } }) {
   const project = await getProjectBySlug(params.slug)
-  if (!project) return { title: 'Progetto non trovato' }
+  if (!project) return { title: 'Proyecto no encontrado' }
 
   return {
-    title: `${project.title} | Portfolio`,
-    description: project.description || `Progetto: ${project.title}`,
+    title: `${project.title} | Manuel Guillin`,
+    description: project.description || `Proyecto: ${project.title}`,
   }
 }
 
@@ -136,7 +136,7 @@ export default async function ProjectPage({ params }: { params: { slug: string }
           className="inline-flex items-center gap-2 text-[#737373] hover:text-white transition-colors"
         >
           <span>←</span>
-          Tutti i progetti
+          Todos los proyectos
         </Link>
       </section>
 
