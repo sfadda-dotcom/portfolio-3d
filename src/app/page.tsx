@@ -1,18 +1,24 @@
 import Hero from '@/components/Hero'
 import ProjectSection from '@/components/ProjectSection'
 import Footer from '@/components/Footer'
-import { getFeaturedProjects } from '@/lib/projects'
+import { getFeaturedProjects, getLandingSettings } from '@/lib/projects'
 
 export const revalidate = 60
 
 export default async function Home() {
-  const projects = await getFeaturedProjects()
+  const [projects, landing] = await Promise.all([
+    getFeaturedProjects(),
+    getLandingSettings(),
+  ])
 
   return (
     <main className="snap-homepage">
       <Hero
-        title="Manuel Guillin"
-        subtitle="2D/3D Motion Graphics Designer · Videomapping · VJing"
+        title={landing.heroTitle}
+        subtitle={landing.heroSubtitle}
+        videoUrl={landing.heroVideoUrl}
+        image={landing.heroImage}
+        showScrollIndicator={landing.showScrollIndicator}
       />
 
       {projects.map((project, index) => (

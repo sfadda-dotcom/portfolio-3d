@@ -1,7 +1,8 @@
 import { put, head, del, list } from '@vercel/blob'
-import type { Project } from './projects'
+import type { Project, LandingSettings } from './projects'
 
 const PROJECTS_BLOB_PATH = 'data/projects.json'
+const LANDING_BLOB_PATH = 'data/landing.json'
 
 function isBlobConfigured(): boolean {
   return !!process.env.BLOB_READ_WRITE_TOKEN
@@ -34,6 +35,39 @@ export async function writeProjectsToBlob(projects: Project[]): Promise<void> {
 
   const json = JSON.stringify(projects, null, 2)
   await put(PROJECTS_BLOB_PATH, json, {
+    access: 'public',
+    contentType: 'application/json',
+    addRandomSuffix: false,
+  })
+}
+
+/** Read landing settings from Vercel Blob. */
+export async function readLandingFromBlob(): Promise<LandingSettings | null> {
+  if (!isBlobConfigured()) return null
+
+  try {
+    const blobs = await list({ prefix: LANDING_BLOB_PATH })
+    const match = blobs.blobs.find((b) => b.pathname === LANDING_BLOB_PATH)
+    if (!match) return null
+
+    const res = await fetch(match.url, { cache: 'no-store' })
+    if (!res.ok) return null
+
+    return (await res.json()) as LandingSettings
+  } catch (err) {
+    console.error('Error reading landing from Blob:', err)
+    return null
+  }
+}
+
+/** Write landing settings to Vercel Blob. */
+export async function writeLandingToBlob(settings: LandingSettings): Promise<void> {
+  if (!isBlobConfigured()) {
+    throw new Error('BLOB_READ_WRITE_TOKEN not configured')
+  }
+
+  const json = JSON.stringify(settings, null, 2)
+  await put(LANDING_BLOB_PATH, json, {
     access: 'public',
     contentType: 'application/json',
     addRandomSuffix: false,

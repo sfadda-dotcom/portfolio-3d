@@ -1,5 +1,27 @@
 import projectsData from '@/data/projects.json'
-import { readProjectsFromBlob } from './blob-storage'
+import { readProjectsFromBlob, readLandingFromBlob } from './blob-storage'
+
+export interface LandingSettings {
+  heroTitle: string
+  heroSubtitle: string
+  heroVideoUrl: string | null
+  heroImage: string | null
+  showScrollIndicator: boolean
+}
+
+export const DEFAULT_LANDING: LandingSettings = {
+  heroTitle: 'Manuel Guillin',
+  heroSubtitle: '2D/3D Motion Graphics Designer · Videomapping · VJing',
+  heroVideoUrl: null,
+  heroImage: null,
+  showScrollIndicator: true,
+}
+
+export async function getLandingSettings(): Promise<LandingSettings> {
+  const settings = await readLandingFromBlob()
+  if (settings) return settings
+  return DEFAULT_LANDING
+}
 
 export interface GalleryItem {
   type: 'image' | 'vimeo' | 'youtube'
