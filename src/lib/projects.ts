@@ -1,4 +1,5 @@
 import projectsData from '@/data/projects.json'
+import { readProjectsFromBlob } from './blob-storage'
 
 export interface GalleryItem {
   type: 'image' | 'vimeo' | 'youtube'
@@ -19,23 +20,32 @@ export interface Project {
   order: number
 }
 
-const projects: Project[] = projectsData as Project[]
+/** Load projects: Blob in production, local JSON as fallback */
+async function loadProjects(): Promise<Project[]> {
+  const blobProjects = await readProjectsFromBlob()
+  if (blobProjects) return blobProjects
+  return projectsData as Project[]
+}
 
-export function getProjects(): Project[] {
+export async function getProjects(): Promise<Project[]> {
+  const projects = await loadProjects()
   return projects.sort((a, b) => a.order - b.order)
 }
 
-export function getFeaturedProjects(): Project[] {
+export async function getFeaturedProjects(): Promise<Project[]> {
+  const projects = await loadProjects()
   return projects
     .filter((p) => p.featured)
     .sort((a, b) => a.order - b.order)
 }
 
-export function getProjectBySlug(slug: string): Project | null {
+export async function getProjectBySlug(slug: string): Promise<Project | null> {
+  const projects = await loadProjects()
   return projects.find((p) => p.slug === slug) || null
 }
 
-export function getCategories(): string[] {
+export async function getCategories(): Promise<string[]> {
+  const projects = await loadProjects()
   const categories = Array.from(new Set(projects.map((p) => p.category)))
   return categories.filter(Boolean)
 }

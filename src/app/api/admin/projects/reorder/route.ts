@@ -1,0 +1,32 @@
+import { NextRequest, NextResponse } from 'next/server'
+import { readProjectsFromBlob, writeProjectsToBlob } from '@/lib/blob-storage'
+import type { Project } from '@/lib/projects'
+import projectsLocal from '@/data/projects.json'
+
+/** POST /api/admin/projects/reorder — Reorder projects */
+export async function POST(request: NextRequest) {
+  try {
+    const { orderedIds } = await request.json() as { orderedIds: string[] }
+
+    if (!Array.isArray(orderedIds)) {
+      return NextResponse.json({ error: 'orderedIds deve essere un array' }, { status: 400 })
+    }
+
+    const projects = (await readProjectsFromBlob()) || (projectsLocal as Project[])
+
+    // Assign new order based on position in array
+    orderedIds.forEach((id, index) => {
+      const project = projects.find((p) => p.id === id)
+      if (project) {
+        project.order = index + 1
+      }
+    })
+
+    await writeProjectsToBlob(projects)
+
+    const sorted = [...projects].sort((a, b) => a.order - b.order)
+    return NextResponse.json(sorted)
+  } catch (err) {
+    return NextResponse.json({ error: 'Errore nel riordino' }, { status: 500 })
+  }
+}

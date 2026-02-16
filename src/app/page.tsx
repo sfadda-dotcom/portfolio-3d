@@ -3,8 +3,10 @@ import ProjectSection from '@/components/ProjectSection'
 import Footer from '@/components/Footer'
 import { getFeaturedProjects } from '@/lib/projects'
 
-export default function Home() {
-  const projects = getFeaturedProjects()
+export const revalidate = 60
+
+export default async function Home() {
+  const projects = await getFeaturedProjects()
 
   return (
     <main>

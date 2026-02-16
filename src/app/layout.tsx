@@ -1,6 +1,6 @@
 import type { Metadata } from 'next'
 import './globals.css'
-import Navigation from '@/components/Navigation'
+import NavigationWrapper from '@/components/NavigationWrapper'
 
 export const metadata: Metadata = {
   title: 'Portfolio | Motion Designer 3D',
@@ -15,7 +15,7 @@ export default function RootLayout({
   return (
     <html lang="it">
       <body className="antialiased">
-        <Navigation />
+        <NavigationWrapper />
         {children}
       </body>
     </html>

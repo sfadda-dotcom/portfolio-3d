@@ -4,15 +4,17 @@ import Link from 'next/link'
 import { getProjectBySlug, getProjects } from '@/lib/projects'
 import Footer from '@/components/Footer'
 
-export function generateStaticParams() {
-  const projects = getProjects()
+export const revalidate = 60
+
+export async function generateStaticParams() {
+  const projects = await getProjects()
   return projects.map((project) => ({
     slug: project.slug,
   }))
 }
 
-export function generateMetadata({ params }: { params: { slug: string } }) {
-  const project = getProjectBySlug(params.slug)
+export async function generateMetadata({ params }: { params: { slug: string } }) {
+  const project = await getProjectBySlug(params.slug)
   if (!project) return { title: 'Progetto non trovato' }
 
   return {
@@ -21,8 +23,8 @@ export function generateMetadata({ params }: { params: { slug: string } }) {
   }
 }
 
-export default function ProjectPage({ params }: { params: { slug: string } }) {
-  const project = getProjectBySlug(params.slug)
+export default async function ProjectPage({ params }: { params: { slug: string } }) {
+  const project = await getProjectBySlug(params.slug)
 
   if (!project) {
     notFound()

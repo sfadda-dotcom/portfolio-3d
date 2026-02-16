@@ -7,9 +7,11 @@ export const metadata = {
   description: 'Tutti i progetti di motion design 3D e animazione',
 }
 
-export default function ProjectsPage() {
-  const projects = getProjects()
-  const categories = getCategories()
+export const revalidate = 60
+
+export default async function ProjectsPage() {
+  const projects = await getProjects()
+  const categories = await getCategories()
 
   return (
     <main className="min-h-screen pt-32 pb-16 px-8">
