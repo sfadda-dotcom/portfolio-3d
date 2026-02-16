@@ -20,6 +20,9 @@ export async function POST(request: NextRequest) {
     const body = await request.json()
     const projects = (await readProjectsFromBlob()) || (projectsLocal as Project[])
 
+    const projectType = body.type || 'project'
+    const sameTypeProjects = projects.filter((p) => (p.type || 'project') === projectType)
+
     const newProject: Project = {
       id: Date.now().toString(),
       slug: body.slug || slugify(body.title),
@@ -30,7 +33,11 @@ export async function POST(request: NextRequest) {
       videoUrl: body.videoUrl || null,
       gallery: body.gallery || [],
       featured: body.featured ?? false,
-      order: body.order ?? projects.length + 1,
+      order: body.order ?? sameTypeProjects.length + 1,
+      type: projectType,
+      discipline: body.discipline || '',
+      place: body.place || '',
+      date: body.date || '',
     }
 
     // Check slug uniqueness

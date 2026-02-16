@@ -3,7 +3,7 @@ import './globals.css'
 import NavigationWrapper from '@/components/NavigationWrapper'
 
 export const metadata: Metadata = {
-  title: 'Portfolio | Motion Designer 3D',
+  title: 'MANUEL GUILLIN',
   description: 'Portfolio di motion design 3D, animazione e contenuti audiovisivi',
 }
 

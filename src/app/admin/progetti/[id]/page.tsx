@@ -245,15 +245,52 @@ export default function EditProject() {
 
         {/* Category */}
         <div>
-          <label className="block text-xs text-[#737373] mb-1.5">Categoria</label>
+          <label className="block text-xs text-[#737373] mb-1.5">Categoría</label>
           <input
             type="text"
             value={project.category}
             onChange={(e) => updateField('category', e.target.value)}
-            placeholder="Es: 2D/3D Motion Graphics, VJing, Videomapping..."
+            placeholder="Ej: 2D/3D Motion Graphics, VJing, Videomapping..."
             className="w-full bg-white/5 border border-white/10 rounded px-3 py-2 text-sm
                        focus:outline-none focus:border-white/30 transition-colors"
           />
+        </div>
+
+        {/* Discipline, Place, Date */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div>
+            <label className="block text-xs text-[#737373] mb-1.5">Disciplina</label>
+            <input
+              type="text"
+              value={project.discipline || ''}
+              onChange={(e) => updateField('discipline' as keyof typeof project, e.target.value)}
+              placeholder="3D, VJ, Mapping, AI..."
+              className="w-full bg-white/5 border border-white/10 rounded px-3 py-2 text-sm
+                         focus:outline-none focus:border-white/30 transition-colors"
+            />
+          </div>
+          <div>
+            <label className="block text-xs text-[#737373] mb-1.5">Lugar</label>
+            <input
+              type="text"
+              value={project.place || ''}
+              onChange={(e) => updateField('place' as keyof typeof project, e.target.value)}
+              placeholder="Barcelona, Buenos Aires..."
+              className="w-full bg-white/5 border border-white/10 rounded px-3 py-2 text-sm
+                         focus:outline-none focus:border-white/30 transition-colors"
+            />
+          </div>
+          <div>
+            <label className="block text-xs text-[#737373] mb-1.5">Fecha</label>
+            <input
+              type="text"
+              value={project.date || ''}
+              onChange={(e) => updateField('date' as keyof typeof project, e.target.value)}
+              placeholder="2024, Jun 2023..."
+              className="w-full bg-white/5 border border-white/10 rounded px-3 py-2 text-sm
+                         focus:outline-none focus:border-white/30 transition-colors"
+            />
+          </div>
         </div>
 
         {/* Description */}
