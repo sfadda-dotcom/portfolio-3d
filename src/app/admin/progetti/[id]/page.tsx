@@ -14,6 +14,12 @@ export default function EditProject() {
   const [saving, setSaving] = useState(false)
   const [uploading, setUploading] = useState(false)
   const [saved, setSaved] = useState(false)
+  const [error, setError] = useState<string | null>(null)
+
+  function showError(msg: string) {
+    setError(msg)
+    setTimeout(() => setError(null), 6000)
+  }
   const fileInputRef = useRef<HTMLInputElement>(null)
   const galleryInputRef = useRef<HTMLInputElement>(null)
 
@@ -54,12 +60,17 @@ export default function EditProject() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(project),
       })
-      if (res.ok) {
-        const updated = await res.json()
-        setProject(updated)
-        setSaved(true)
-        setTimeout(() => setSaved(false), 2000)
+      if (!res.ok) {
+        const data = await res.json().catch(() => ({}))
+        showError(data.error || `Error al guardar (${res.status})`)
+        return
       }
+      const updated = await res.json()
+      setProject(updated)
+      setSaved(true)
+      setTimeout(() => setSaved(false), 2000)
+    } catch {
+      showError('Error de conexión al guardar')
     } finally {
       setSaving(false)
     }
@@ -76,16 +87,22 @@ export default function EditProject() {
         body: formData,
       })
 
-      if (res.ok) {
-        const { url } = await res.json()
-        if (target === 'thumbnail') {
-          updateField('thumbnail', url)
-        } else {
-          const gallery = [...(project?.gallery || [])]
-          gallery.push({ type: 'image', url, caption: '' })
-          updateField('gallery', gallery)
-        }
+      if (!res.ok) {
+        const data = await res.json().catch(() => ({}))
+        showError(data.error || `Error al subir imagen (${res.status})`)
+        return
       }
+
+      const { url } = await res.json()
+      if (target === 'thumbnail') {
+        updateField('thumbnail', url)
+      } else {
+        const gallery = [...(project?.gallery || [])]
+        gallery.push({ type: 'image', url, caption: '' })
+        updateField('gallery', gallery)
+      }
+    } catch {
+      showError('Error de conexión al subir imagen')
     } finally {
       setUploading(false)
     }
@@ -126,6 +143,16 @@ export default function EditProject() {
 
   return (
     <div className="min-h-screen">
+      {/* Error toast */}
+      {error && (
+        <div className="fixed top-4 left-1/2 -translate-x-1/2 z-50 max-w-md w-full px-4">
+          <div className="bg-red-500/90 backdrop-blur text-white text-sm px-4 py-3 rounded-lg shadow-lg flex items-center justify-between">
+            <span>{error}</span>
+            <button onClick={() => setError(null)} className="ml-3 text-white/70 hover:text-white text-lg leading-none">&times;</button>
+          </div>
+        </div>
+      )}
+
       {/* Header */}
       <header className="sticky top-0 z-10 bg-[#111]/95 backdrop-blur border-b border-white/5">
         <div className="max-w-3xl mx-auto px-4 py-4 flex items-center justify-between">

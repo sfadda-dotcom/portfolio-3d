@@ -8,23 +8,26 @@ export async function POST(request: NextRequest) {
     const file = formData.get('file') as File | null
 
     if (!file) {
-      return NextResponse.json({ error: 'Nessun file inviato' }, { status: 400 })
+      return NextResponse.json({ error: 'No se envió ningún archivo' }, { status: 400 })
     }
 
     // Validate type
     if (!file.type.startsWith('image/')) {
-      return NextResponse.json({ error: 'Solo immagini sono permesse' }, { status: 400 })
+      return NextResponse.json({ error: 'Solo se permiten imágenes' }, { status: 400 })
     }
 
     // Validate size (max 10MB)
     if (file.size > 10 * 1024 * 1024) {
-      return NextResponse.json({ error: 'File troppo grande (max 10MB)' }, { status: 400 })
+      return NextResponse.json({ error: 'Archivo demasiado grande (máx 10MB)' }, { status: 400 })
     }
 
     const url = await uploadImage(file, 'portfolio')
 
     return NextResponse.json({ url })
-  } catch (err) {
-    return NextResponse.json({ error: 'Errore nell\'upload' }, { status: 500 })
+  } catch (err: any) {
+    const message = err?.message?.includes('BLOB_READ_WRITE_TOKEN')
+      ? 'Storage no configurado. Configura BLOB_READ_WRITE_TOKEN en Vercel.'
+      : `Error al subir: ${err?.message || 'Error desconocido'}`
+    return NextResponse.json({ error: message }, { status: 500 })
   }
 }

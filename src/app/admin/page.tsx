@@ -17,15 +17,24 @@ export default function AdminDashboard() {
   const [saving, setSaving] = useState(false)
   const [dragIndex, setDragIndex] = useState<number | null>(null)
   const [activeTab, setActiveTab] = useState<ProjectType>('project')
+  const [error, setError] = useState<string | null>(null)
+
+  function showError(msg: string) {
+    setError(msg)
+    setTimeout(() => setError(null), 6000)
+  }
 
   const loadProjects = useCallback(async () => {
     try {
       const res = await fetch('/api/admin/projects')
-      if (res.ok) {
-        setAllProjects(await res.json())
+      if (!res.ok) {
+        const data = await res.json().catch(() => ({}))
+        showError(data.error || `Error al cargar proyectos (${res.status})`)
+        return
       }
+      setAllProjects(await res.json())
     } catch (err) {
-      console.error('Error al cargar:', err)
+      showError('Error de conexión al cargar proyectos')
     } finally {
       setLoading(false)
     }
@@ -47,8 +56,15 @@ export default function AdminDashboard() {
     if (!confirm(`¿Eliminar "${title}"?`)) return
     setSaving(true)
     try {
-      await fetch(`/api/admin/projects?id=${id}`, { method: 'DELETE' })
+      const res = await fetch(`/api/admin/projects?id=${id}`, { method: 'DELETE' })
+      if (!res.ok) {
+        const data = await res.json().catch(() => ({}))
+        showError(data.error || `Error al eliminar (${res.status})`)
+        return
+      }
       await loadProjects()
+    } catch {
+      showError('Error de conexión al eliminar')
     } finally {
       setSaving(false)
     }
@@ -57,12 +73,19 @@ export default function AdminDashboard() {
   async function handleToggleFeatured(project: Project) {
     setSaving(true)
     try {
-      await fetch('/api/admin/projects', {
+      const res = await fetch('/api/admin/projects', {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ id: project.id, featured: !project.featured }),
       })
+      if (!res.ok) {
+        const data = await res.json().catch(() => ({}))
+        showError(data.error || `Error al actualizar (${res.status})`)
+        return
+      }
       await loadProjects()
+    } catch {
+      showError('Error de conexión al actualizar')
     } finally {
       setSaving(false)
     }
@@ -81,10 +104,15 @@ export default function AdminDashboard() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ title: labels[activeTab], type: activeTab }),
       })
-      if (res.ok) {
-        const project = await res.json()
-        router.push(`/admin/progetti/${project.id}`)
+      if (!res.ok) {
+        const data = await res.json().catch(() => ({}))
+        showError(data.error || `Error al crear proyecto (${res.status})`)
+        return
       }
+      const project = await res.json()
+      router.push(`/admin/progetti/${project.id}`)
+    } catch {
+      showError('Error de conexión al crear proyecto')
     } finally {
       setSaving(false)
     }
@@ -93,8 +121,15 @@ export default function AdminDashboard() {
   async function handleSeed() {
     setSaving(true)
     try {
-      await fetch('/api/admin/seed', { method: 'POST' })
+      const res = await fetch('/api/admin/seed', { method: 'POST' })
+      if (!res.ok) {
+        const data = await res.json().catch(() => ({}))
+        showError(data.error || `Error al cargar datos iniciales (${res.status})`)
+        return
+      }
       await loadProjects()
+    } catch {
+      showError('Error de conexión al cargar datos iniciales')
     } finally {
       setSaving(false)
     }
@@ -128,13 +163,18 @@ export default function AdminDashboard() {
     setDragIndex(null)
     setSaving(true)
     try {
-      // Send only the IDs of the current type, in order
       const orderedIds = projects.map((p) => p.id)
-      await fetch('/api/admin/projects/reorder', {
+      const res = await fetch('/api/admin/projects/reorder', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ orderedIds }),
       })
+      if (!res.ok) {
+        const data = await res.json().catch(() => ({}))
+        showError(data.error || `Error al reordenar (${res.status})`)
+      }
+    } catch {
+      showError('Error de conexión al reordenar')
     } finally {
       setSaving(false)
     }
@@ -159,11 +199,17 @@ export default function AdminDashboard() {
     setSaving(true)
     try {
       const updatedFiltered = reordered.filter((p) => (p.type || 'project') === activeTab)
-      await fetch('/api/admin/projects/reorder', {
+      const res = await fetch('/api/admin/projects/reorder', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ orderedIds: updatedFiltered.map((p) => p.id) }),
       })
+      if (!res.ok) {
+        const data = await res.json().catch(() => ({}))
+        showError(data.error || `Error al reordenar (${res.status})`)
+      }
+    } catch {
+      showError('Error de conexión al reordenar')
     } finally {
       setSaving(false)
     }
@@ -179,6 +225,16 @@ export default function AdminDashboard() {
 
   return (
     <div className="min-h-screen">
+      {/* Error toast */}
+      {error && (
+        <div className="fixed top-4 left-1/2 -translate-x-1/2 z-50 max-w-md w-full px-4">
+          <div className="bg-red-500/90 backdrop-blur text-white text-sm px-4 py-3 rounded-lg shadow-lg flex items-center justify-between">
+            <span>{error}</span>
+            <button onClick={() => setError(null)} className="ml-3 text-white/70 hover:text-white text-lg leading-none">&times;</button>
+          </div>
+        </div>
+      )}
+
       {/* Header */}
       <header className="sticky top-0 z-10 bg-[#111]/95 backdrop-blur border-b border-white/5">
         <div className="max-w-5xl mx-auto px-4 py-4 flex items-center justify-between">

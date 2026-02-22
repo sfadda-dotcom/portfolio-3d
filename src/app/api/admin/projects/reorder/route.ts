@@ -26,7 +26,10 @@ export async function POST(request: NextRequest) {
 
     const sorted = [...projects].sort((a, b) => a.order - b.order)
     return NextResponse.json(sorted)
-  } catch (err) {
-    return NextResponse.json({ error: 'Errore nel riordino' }, { status: 500 })
+  } catch (err: any) {
+    const message = err?.message?.includes('BLOB_READ_WRITE_TOKEN')
+      ? 'Storage no configurado. Configura BLOB_READ_WRITE_TOKEN en Vercel.'
+      : `Error al reordenar: ${err?.message || 'Error desconocido'}`
+    return NextResponse.json({ error: message }, { status: 500 })
   }
 }

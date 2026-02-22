@@ -26,7 +26,7 @@ export async function POST(request: NextRequest) {
     const newProject: Project = {
       id: Date.now().toString(),
       slug: body.slug || slugify(body.title),
-      title: body.title || 'Nuovo progetto',
+      title: body.title || 'Nuevo proyecto',
       category: body.category || '',
       description: body.description || '',
       thumbnail: body.thumbnail || '',
@@ -49,8 +49,11 @@ export async function POST(request: NextRequest) {
     await writeProjectsToBlob(projects)
 
     return NextResponse.json(newProject, { status: 201 })
-  } catch (err) {
-    return NextResponse.json({ error: 'Errore nella creazione' }, { status: 500 })
+  } catch (err: any) {
+    const message = err?.message?.includes('BLOB_READ_WRITE_TOKEN')
+      ? 'Storage no configurado. Configura BLOB_READ_WRITE_TOKEN en las variables de entorno de Vercel.'
+      : `Error al crear: ${err?.message || 'Error desconocido'}`
+    return NextResponse.json({ error: message }, { status: 500 })
   }
 }
 
@@ -84,8 +87,11 @@ export async function PUT(request: NextRequest) {
     await writeProjectsToBlob(projects)
 
     return NextResponse.json(projects[index])
-  } catch (err) {
-    return NextResponse.json({ error: 'Errore nell\'aggiornamento' }, { status: 500 })
+  } catch (err: any) {
+    const message = err?.message?.includes('BLOB_READ_WRITE_TOKEN')
+      ? 'Storage no configurado. Configura BLOB_READ_WRITE_TOKEN en las variables de entorno de Vercel.'
+      : `Error al guardar: ${err?.message || 'Error desconocido'}`
+    return NextResponse.json({ error: message }, { status: 500 })
   }
 }
 
@@ -114,8 +120,11 @@ export async function DELETE(request: NextRequest) {
     await writeProjectsToBlob(filtered)
 
     return NextResponse.json({ success: true })
-  } catch (err) {
-    return NextResponse.json({ error: 'Errore nell\'eliminazione' }, { status: 500 })
+  } catch (err: any) {
+    const message = err?.message?.includes('BLOB_READ_WRITE_TOKEN')
+      ? 'Storage no configurado. Configura BLOB_READ_WRITE_TOKEN en las variables de entorno de Vercel.'
+      : `Error al eliminar: ${err?.message || 'Error desconocido'}`
+    return NextResponse.json({ error: message }, { status: 500 })
   }
 }
 
