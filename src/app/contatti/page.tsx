@@ -72,7 +72,7 @@ export default function ContactPage() {
                   Based in
                 </h3>
                 <p className="text-sm text-white/70">
-                  Buenos Aires, Argentina
+                  Barcelona, Spain
                 </p>
               </div>
             </div>
