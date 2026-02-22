@@ -3,6 +3,8 @@ import { readProjectsFromBlob, writeProjectsToBlob } from '@/lib/blob-storage'
 import type { Project } from '@/lib/projects'
 import projectsLocal from '@/data/projects.json'
 
+export const dynamic = 'force-dynamic'
+
 /** GET /api/admin/projects — List all projects */
 export async function GET() {
   try {

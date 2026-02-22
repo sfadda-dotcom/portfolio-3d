@@ -3,6 +3,8 @@ import { readProjectsFromBlob, writeProjectsToBlob } from '@/lib/blob-storage'
 import type { Project } from '@/lib/projects'
 import projectsLocal from '@/data/projects.json'
 
+export const dynamic = 'force-dynamic'
+
 /** POST /api/admin/projects/reorder — Reorder projects */
 export async function POST(request: NextRequest) {
   try {
