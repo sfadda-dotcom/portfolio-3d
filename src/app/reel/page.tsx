@@ -36,7 +36,7 @@ export default async function ReelPage() {
                     )}
                   </div>
 
-                  {reel.videoUrl && (
+                  {reel.videoUrl ? (
                     <div className="aspect-video bg-neutral-900 overflow-hidden">
                       <iframe
                         src={reel.videoUrl}
@@ -44,6 +44,10 @@ export default async function ReelPage() {
                         allow="autoplay; fullscreen; picture-in-picture"
                         style={{ border: 'none' }}
                       />
+                    </div>
+                  ) : (
+                    <div className="aspect-video bg-white/[0.04] border border-white/[0.08] flex items-center justify-center">
+                      <span className="text-xs tracking-[0.15em] uppercase text-white/20">Video pending</span>
                     </div>
                   )}
 

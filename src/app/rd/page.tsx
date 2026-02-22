@@ -44,7 +44,11 @@ export default async function RDPage() {
                         className="object-cover"
                       />
                     </div>
-                  ) : null}
+                  ) : (
+                    <div className="aspect-video overflow-hidden bg-white/[0.04] border border-white/[0.08] flex items-center justify-center">
+                      <span className="text-xs tracking-[0.15em] uppercase text-white/20">R&D</span>
+                    </div>
+                  )}
                   <div className="mt-3 mb-2">
                     <h3 className="text-sm font-light">{item.title}</h3>
                     {item.category && (
