@@ -31,7 +31,7 @@ export default function Navigation() {
           scrolled ? 'bg-black/80 backdrop-blur-md' : 'bg-transparent'
         }`}
       >
-        <nav className="flex items-center justify-between px-[var(--section-padding-x)] h-16">
+        <nav className="flex items-center justify-between px-[var(--section-padding-x)]" style={{ height: 'var(--header-height)' }}>
           {/* Left — Nav links (desktop) */}
           <div className="hidden md:flex items-center gap-6">
             {navLinks.map((link) => (

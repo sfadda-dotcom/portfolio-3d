@@ -13,7 +13,7 @@ export default async function ReelPage() {
 
   return (
     <main className="min-h-screen flex flex-col">
-      <div className="flex-1 pt-40 md:pt-48 pb-16 px-[var(--section-padding-x)]">
+      <div className="flex-1 page-content pb-16 px-[var(--section-padding-x)]">
         <div className="max-w-6xl mx-auto">
           <header className="mb-10">
             <h1 className="text-5xl md:text-7xl lg:text-8xl font-extralight tracking-tight">

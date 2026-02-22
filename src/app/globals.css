@@ -6,6 +6,7 @@
   --accent: #ffffff;
   --muted: #737373;
   --border: rgba(255, 255, 255, 0.08);
+  --header-height: 4rem;
   --section-padding-x: 2rem;
   --grid-gap: 1rem;
 }
@@ -24,10 +25,15 @@
   }
 }
 
-* {
-  margin: 0;
-  padding: 0;
+*,
+*::before,
+*::after {
   box-sizing: border-box;
+}
+
+/* Page content offset for fixed header */
+.page-content {
+  padding-top: calc(var(--header-height) + 3rem);
 }
 
 html {
