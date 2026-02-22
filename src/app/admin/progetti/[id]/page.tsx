@@ -76,11 +76,13 @@ export default function EditProject() {
     }
   }
 
-  async function handleUpload(file: File, target: 'thumbnail' | 'gallery') {
+  async function handleUpload(files: FileList | File[], target: 'thumbnail' | 'gallery') {
     setUploading(true)
     try {
       const formData = new FormData()
-      formData.append('file', file)
+      for (const file of Array.from(files)) {
+        formData.append('file', file)
+      }
 
       const res = await fetch('/api/admin/upload', {
         method: 'POST',
@@ -93,12 +95,14 @@ export default function EditProject() {
         return
       }
 
-      const { url } = await res.json()
+      const { url, urls } = await res.json()
       if (target === 'thumbnail') {
         updateField('thumbnail', url)
       } else {
         const gallery = [...(project?.gallery || [])]
-        gallery.push({ type: 'image', url, caption: '' })
+        for (const u of urls as string[]) {
+          gallery.push({ type: 'image', url: u, caption: '' })
+        }
         updateField('gallery', gallery)
       }
     } catch {
@@ -228,8 +232,8 @@ export default function EditProject() {
               accept="image/*"
               className="hidden"
               onChange={(e) => {
-                const file = e.target.files?.[0]
-                if (file) handleUpload(file, 'thumbnail')
+                const files = e.target.files
+                if (files && files.length > 0) handleUpload(files, 'thumbnail')
                 e.target.value = ''
               }}
             />
@@ -383,7 +387,7 @@ export default function EditProject() {
                 onClick={() => galleryInputRef.current?.click()}
                 className="text-xs bg-white/5 hover:bg-white/10 border border-white/10 px-3 py-1 rounded transition-colors"
               >
-                + Imagen
+                + Imágenes
               </button>
               <button
                 onClick={handleAddGalleryVideo}
@@ -396,10 +400,11 @@ export default function EditProject() {
               ref={galleryInputRef}
               type="file"
               accept="image/*"
+              multiple
               className="hidden"
               onChange={(e) => {
-                const file = e.target.files?.[0]
-                if (file) handleUpload(file, 'gallery')
+                const files = e.target.files
+                if (files && files.length > 0) handleUpload(files, 'gallery')
                 e.target.value = ''
               }}
             />

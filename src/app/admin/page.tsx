@@ -283,6 +283,25 @@ export default function AdminDashboard() {
           </span>
         </button>
 
+        {/* About Me editor link */}
+        <button
+          onClick={() => router.push('/admin/about')}
+          className="w-full mb-8 flex items-center justify-between p-4 rounded-lg
+                     bg-white/[0.03] border border-white/5 hover:bg-white/[0.06]
+                     hover:border-white/10 transition-all group"
+        >
+          <div className="flex items-center gap-3">
+            <span className="text-lg">👤</span>
+            <div className="text-left">
+              <p className="text-sm font-medium">About Me</p>
+              <p className="text-xs text-[#737373]">Bio, disciplinas, software, experiencia y estudios</p>
+            </div>
+          </div>
+          <span className="text-xs text-[#737373] group-hover:text-white transition-colors">
+            Editar →
+          </span>
+        </button>
+
         {/* Tabs */}
         <div className="flex items-center gap-1 mb-8 border-b border-white/5">
           {TABS.map((tab) => {
