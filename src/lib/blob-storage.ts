@@ -38,6 +38,7 @@ export async function writeProjectsToBlob(projects: Project[]): Promise<void> {
     access: 'public',
     contentType: 'application/json',
     addRandomSuffix: false,
+    allowOverwrite: true,
   })
 }
 
@@ -71,6 +72,7 @@ export async function writeLandingToBlob(settings: LandingSettings): Promise<voi
     access: 'public',
     contentType: 'application/json',
     addRandomSuffix: false,
+    allowOverwrite: true,
   })
 }
 
