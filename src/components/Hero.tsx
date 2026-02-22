@@ -13,15 +13,22 @@ interface HeroProps {
 
 export default function Hero({ title, subtitle, videoUrl, image, showScrollIndicator = true }: HeroProps) {
   return (
-    <section className="section-fullscreen relative flex items-center justify-center overflow-hidden">
-      {/* Background */}
-      <div className="absolute inset-0">
+    <section className="relative overflow-hidden" style={{ height: '100vh' }}>
+      {/* Background — video / image / gradient fallback */}
+      <div className="absolute inset-0 z-0">
         {videoUrl ? (
           <iframe
             src={`${videoUrl}?background=1&autoplay=1&loop=1&muted=1`}
-            className="w-full h-full"
-            allow="autoplay; fullscreen"
-            style={{ border: 'none', position: 'absolute', top: 0, left: 0, width: '100%', height: '100%' }}
+            allow="autoplay"
+            style={{
+              position: 'absolute',
+              top: 0,
+              left: 0,
+              width: '100%',
+              height: '100%',
+              border: 'none',
+              pointerEvents: 'none',
+            }}
           />
         ) : image ? (
           <Image
@@ -34,18 +41,20 @@ export default function Hero({ title, subtitle, videoUrl, image, showScrollIndic
         ) : (
           <div className="absolute inset-0 bg-gradient-to-b from-black via-neutral-950 to-black" />
         )}
-        {(videoUrl || image) && (
-          <div className="absolute inset-0 bg-black/30" />
-        )}
       </div>
 
-      {/* Content */}
-      <div className="relative z-10 text-center px-[var(--section-padding-x)] max-w-6xl">
+      {/* Dark overlay */}
+      {(videoUrl || image) && (
+        <div className="absolute inset-0 bg-black/40 z-[1]" />
+      )}
+
+      {/* Content — centered text */}
+      <div className="relative z-[2] flex flex-col items-center justify-center h-full text-center px-[var(--section-padding-x)]">
         <motion.h1
           initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
-          className="text-5xl md:text-7xl lg:text-8xl font-extralight tracking-tight leading-tight"
+          className="text-5xl md:text-7xl lg:text-8xl font-extralight tracking-tight leading-tight max-w-6xl"
         >
           {title}
         </motion.h1>
@@ -62,13 +71,13 @@ export default function Hero({ title, subtitle, videoUrl, image, showScrollIndic
         )}
       </div>
 
-      {/* Scroll indicator — chevron */}
+      {/* Scroll indicator */}
       {showScrollIndicator && (
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 1.5 }}
-          className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10 flex flex-col items-center gap-2"
+          className="absolute bottom-8 left-1/2 -translate-x-1/2 z-[2] flex flex-col items-center gap-2"
         >
           <motion.div
             animate={{ y: [0, 6, 0] }}
