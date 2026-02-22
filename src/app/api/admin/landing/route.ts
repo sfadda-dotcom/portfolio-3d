@@ -3,6 +3,8 @@ import { readLandingFromBlob, writeLandingToBlob } from '@/lib/blob-storage'
 import { DEFAULT_LANDING } from '@/lib/projects'
 import type { LandingSettings } from '@/lib/projects'
 
+export const dynamic = 'force-dynamic'
+
 export async function GET() {
   try {
     const settings = await readLandingFromBlob()
