@@ -7,9 +7,9 @@ import { motion, AnimatePresence } from 'framer-motion'
 
 const navLinks = [
   { href: '/progetti', label: 'Work' },
-  { href: '/studio', label: 'About Me' },
   { href: '/reel', label: 'Reel' },
   { href: '/rd', label: 'R&D' },
+  { href: '/studio', label: 'About Me' },
   { href: '/contatti', label: 'Contact' },
 ]
 
@@ -32,7 +32,15 @@ export default function Navigation() {
         }`}
       >
         <nav className="flex items-center justify-between px-[var(--section-padding-x)]" style={{ height: 'var(--header-height)' }}>
-          {/* Left — Nav links (desktop) */}
+          {/* Left — Logo */}
+          <Link
+            href="/"
+            className="text-[11px] font-medium tracking-[0.25em] uppercase text-white hover:opacity-70 transition-opacity"
+          >
+            MANUEL GUILLIN
+          </Link>
+
+          {/* Right — Nav links (desktop) */}
           <div className="hidden md:flex items-center gap-6">
             {navLinks.map((link) => (
               <Link
@@ -49,21 +57,13 @@ export default function Navigation() {
             ))}
           </div>
 
-          {/* Mobile — Menu button (left) */}
+          {/* Mobile — Menu button (right) */}
           <button
             onClick={() => setIsOpen(!isOpen)}
             className="md:hidden text-[11px] tracking-[0.15em] uppercase text-white"
           >
             {isOpen ? 'CLOSE' : 'MENU'}
           </button>
-
-          {/* Right — Logo */}
-          <Link
-            href="/"
-            className="text-[11px] font-medium tracking-[0.25em] uppercase text-white hover:opacity-70 transition-opacity"
-          >
-            MANUEL GUILLIN
-          </Link>
         </nav>
       </header>
 
