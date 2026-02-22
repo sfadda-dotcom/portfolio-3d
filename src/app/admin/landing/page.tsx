@@ -10,6 +10,7 @@ export default function EditLanding() {
   const [loading, setLoading] = useState(true)
   const [saving, setSaving] = useState(false)
   const [saved, setSaved] = useState(false)
+  const [error, setError] = useState<string | null>(null)
   const [uploading, setUploading] = useState(false)
   const fileInputRef = useRef<HTMLInputElement>(null)
 
@@ -32,6 +33,7 @@ export default function EditLanding() {
   async function handleSave() {
     if (!settings) return
     setSaving(true)
+    setError(null)
     try {
       const res = await fetch('/api/admin/landing', {
         method: 'PUT',
@@ -43,7 +45,12 @@ export default function EditLanding() {
         setSettings(updated)
         setSaved(true)
         setTimeout(() => setSaved(false), 2000)
+      } else {
+        const data = await res.json().catch(() => ({}))
+        setError(data.error || `Error al guardar (${res.status})`)
       }
+    } catch (err) {
+      setError('Error de red. Verifica que BLOB_READ_WRITE_TOKEN esté configurado.')
     } finally {
       setSaving(false)
     }
@@ -93,6 +100,9 @@ export default function EditLanding() {
             <h1 className="text-sm font-medium">Landing Page</h1>
           </div>
           <div className="flex items-center gap-3">
+            {error && (
+              <span className="text-xs text-red-400">{error}</span>
+            )}
             {saved && (
               <span className="text-xs text-green-400">Guardado ✓</span>
             )}
