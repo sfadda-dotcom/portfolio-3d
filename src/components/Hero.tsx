@@ -34,19 +34,18 @@ export default function Hero({ title, subtitle, videoUrl, image, showScrollIndic
         ) : (
           <div className="absolute inset-0 bg-gradient-to-b from-black via-neutral-950 to-black" />
         )}
-        {/* Overlay — always present when there's media */}
         {(videoUrl || image) && (
-          <div className="absolute inset-0 bg-black/40" />
+          <div className="absolute inset-0 bg-black/30" />
         )}
       </div>
 
       {/* Content */}
-      <div className="relative z-10 text-center px-8 max-w-5xl">
+      <div className="relative z-10 text-center px-[var(--section-padding-x)] max-w-6xl">
         <motion.h1
           initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
-          className="text-4xl md:text-6xl lg:text-7xl font-light tracking-tight leading-tight"
+          className="text-5xl md:text-7xl lg:text-8xl font-extralight tracking-tight leading-tight"
         >
           {title}
         </motion.h1>
@@ -56,27 +55,36 @@ export default function Hero({ title, subtitle, videoUrl, image, showScrollIndic
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
-            className="mt-6 text-lg md:text-xl text-white/60 max-w-2xl mx-auto"
+            className="mt-6 text-xs md:text-sm tracking-[0.2em] uppercase text-white/50"
           >
             {subtitle}
           </motion.p>
         )}
       </div>
 
-      {/* Scroll indicator — positioned relative to the section, not the content */}
+      {/* Scroll indicator — chevron */}
       {showScrollIndicator && (
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 1.5 }}
-          className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10"
+          className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10 flex flex-col items-center gap-2"
         >
           <motion.div
-            animate={{ y: [0, 8, 0] }}
-            transition={{ duration: 1.5, repeat: Infinity }}
-            className="text-white/40 text-xs tracking-widest"
+            animate={{ y: [0, 6, 0] }}
+            transition={{ duration: 1.8, repeat: Infinity, ease: 'easeInOut' }}
           >
-            SCROLL
+            <svg
+              width="20"
+              height="20"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="1"
+              className="text-white/30"
+            >
+              <path d="M6 9l6 6 6-6" />
+            </svg>
           </motion.div>
         </motion.div>
       )}

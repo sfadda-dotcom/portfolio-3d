@@ -15,11 +15,11 @@ export async function generateStaticParams() {
 
 export async function generateMetadata({ params }: { params: { slug: string } }) {
   const project = await getProjectBySlug(params.slug)
-  if (!project) return { title: 'Proyecto no encontrado' }
+  if (!project) return { title: 'Project not found' }
 
   return {
-    title: `${project.title} | Manuel Guillin`,
-    description: project.description || `Proyecto: ${project.title}`,
+    title: project.title,
+    description: project.description || `Project: ${project.title}`,
   }
 }
 
@@ -32,8 +32,8 @@ export default async function ProjectPage({ params }: { params: { slug: string }
 
   return (
     <main className="min-h-screen">
-      {/* Hero */}
-      <section className="relative h-[80vh] flex items-end overflow-hidden">
+      {/* Hero — full viewport, image/video only */}
+      <section className="relative h-screen overflow-hidden">
         <div className="absolute inset-0">
           {project.videoUrl ? (
             <iframe
@@ -51,31 +51,74 @@ export default async function ProjectPage({ params }: { params: { slug: string }
               priority
             />
           )}
-          <div className="absolute inset-0 bg-gradient-to-t from-black via-black/30 to-transparent" />
-        </div>
-
-        <div className="relative z-10 w-full px-8 md:px-16 pb-16">
-          <span className="text-xs tracking-[0.3em] text-white/60 uppercase">
-            {project.category}
-          </span>
-          <h1 className="mt-4 text-5xl md:text-7xl font-light tracking-tight">
-            {project.title}
-          </h1>
+          <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0a] via-transparent to-transparent" />
         </div>
       </section>
 
-      {/* Description */}
-      <section className="py-24 px-8 md:px-16">
-        <div className="max-w-4xl">
-          {project.description && (
-            <p className="text-xl md:text-2xl text-white/80 leading-relaxed">
+      {/* 001 — Title + Meta */}
+      <section className="py-20 px-[var(--section-padding-x)]">
+        <div className="max-w-5xl">
+          <span className="section-number">001</span>
+          <h1 className="mt-4 text-4xl md:text-6xl lg:text-7xl font-extralight tracking-tight">
+            {project.title}
+          </h1>
+
+          {/* Credits row */}
+          <div className="mt-10 grid grid-cols-2 md:grid-cols-4 gap-6 border-t border-white/[0.08] pt-8">
+            {project.category && (
+              <div>
+                <span className="text-xs tracking-[0.15em] uppercase text-white/35 block mb-1">
+                  Category
+                </span>
+                <span className="text-sm text-white/80">{project.category}</span>
+              </div>
+            )}
+            {project.discipline && (
+              <div>
+                <span className="text-xs tracking-[0.15em] uppercase text-white/35 block mb-1">
+                  Discipline
+                </span>
+                <span className="text-sm text-white/80">{project.discipline}</span>
+              </div>
+            )}
+            {project.place && (
+              <div>
+                <span className="text-xs tracking-[0.15em] uppercase text-white/35 block mb-1">
+                  Location
+                </span>
+                <span className="text-sm text-white/80">{project.place}</span>
+              </div>
+            )}
+            {project.date && (
+              <div>
+                <span className="text-xs tracking-[0.15em] uppercase text-white/35 block mb-1">
+                  Year
+                </span>
+                <span className="text-sm text-white/80">{project.date}</span>
+              </div>
+            )}
+          </div>
+        </div>
+      </section>
+
+      {/* 002 — Description */}
+      {project.description && (
+        <section className="pb-20 px-[var(--section-padding-x)]">
+          <div className="max-w-4xl">
+            <span className="section-number">002</span>
+            <p className="mt-4 text-xl md:text-2xl font-extralight leading-relaxed text-white/80">
               {project.description}
             </p>
-          )}
+          </div>
+        </section>
+      )}
 
-          {/* Video principale */}
-          {project.videoUrl && (
-            <div className="mt-16 aspect-video bg-neutral-900 rounded-lg overflow-hidden">
+      {/* 003 — Video */}
+      {project.videoUrl && (
+        <section className="pb-20 px-[var(--section-padding-x)]">
+          <div className="max-w-6xl">
+            <span className="section-number">003</span>
+            <div className="mt-4 aspect-video bg-neutral-900 overflow-hidden">
               <iframe
                 src={project.videoUrl}
                 className="w-full h-full"
@@ -83,60 +126,57 @@ export default async function ProjectPage({ params }: { params: { slug: string }
                 style={{ border: 'none' }}
               />
             </div>
-          )}
-        </div>
-      </section>
+          </div>
+        </section>
+      )}
 
-      {/* Gallery */}
+      {/* Gallery — full width */}
       {project.gallery && project.gallery.length > 0 && (
-        <section className="px-8 md:px-16 pb-24">
-          <div className="max-w-7xl mx-auto">
-            <h2 className="text-xs tracking-[0.3em] text-white/60 uppercase mb-8">
-              Galería
-            </h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              {project.gallery.map((item, index) => (
-                <div key={index} className="relative overflow-hidden rounded-lg bg-neutral-900">
-                  {item.type === 'image' ? (
-                    <div className="relative aspect-video">
-                      <Image
-                        src={item.url}
-                        alt={item.caption || `${project.title} - ${index + 1}`}
-                        fill
-                        className="object-cover hover:scale-105 transition-transform duration-500"
-                      />
-                    </div>
-                  ) : item.type === 'vimeo' || item.type === 'youtube' ? (
-                    <div className="aspect-video">
-                      <iframe
-                        src={item.type === 'youtube'
-                          ? item.url.replace('watch?v=', 'embed/')
-                          : item.url
-                        }
-                        className="w-full h-full"
-                        allow="autoplay; fullscreen; picture-in-picture"
-                        style={{ border: 'none' }}
-                      />
-                    </div>
-                  ) : null}
-                  {item.caption && (
-                    <p className="p-4 text-sm text-white/60">{item.caption}</p>
-                  )}
-                </div>
-              ))}
-            </div>
+        <section className="pb-20">
+          <div className="space-y-[var(--grid-gap)]">
+            {project.gallery.map((item, index) => (
+              <div key={index} className="w-full">
+                {item.type === 'image' ? (
+                  <div className="relative w-full aspect-video bg-neutral-900">
+                    <Image
+                      src={item.url}
+                      alt={item.caption || `${project.title} — ${index + 1}`}
+                      fill
+                      className="object-cover"
+                    />
+                  </div>
+                ) : item.type === 'vimeo' || item.type === 'youtube' ? (
+                  <div className="w-full aspect-video bg-neutral-900">
+                    <iframe
+                      src={item.type === 'youtube'
+                        ? item.url.replace('watch?v=', 'embed/')
+                        : item.url
+                      }
+                      className="w-full h-full"
+                      allow="autoplay; fullscreen; picture-in-picture"
+                      style={{ border: 'none' }}
+                    />
+                  </div>
+                ) : null}
+                {item.caption && (
+                  <p className="px-[var(--section-padding-x)] mt-3 text-xs text-white/40">
+                    {item.caption}
+                  </p>
+                )}
+              </div>
+            ))}
           </div>
         </section>
       )}
 
       {/* Back link */}
-      <section className="px-8 md:px-16 pb-24">
+      <section className="px-[var(--section-padding-x)] pb-24">
         <Link
           href="/progetti"
-          className="inline-flex items-center gap-2 text-[#737373] hover:text-white transition-colors"
+          className="inline-flex items-center gap-3 text-xs tracking-[0.15em] uppercase text-white/40 hover:text-white transition-colors"
         >
-          <span>←</span>
-          Todos los proyectos
+          <span>&larr;</span>
+          All projects
         </Link>
       </section>
 

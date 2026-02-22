@@ -2,8 +2,8 @@ import { getProjects } from '@/lib/projects'
 import Footer from '@/components/Footer'
 
 export const metadata = {
-  title: 'Reel | Manuel Guillin',
-  description: 'Showreels de motion graphics 3D, 2D y videomapping',
+  title: 'Reel',
+  description: 'Showreels — motion graphics 3D, 2D and videomapping',
 }
 
 export const revalidate = 60
@@ -12,65 +12,63 @@ export default async function ReelPage() {
   const reels = await getProjects('reel')
 
   return (
-    <main className="min-h-screen pt-40 md:pt-48 pb-16 px-8">
-      <div className="max-w-6xl mx-auto">
-        <header className="mb-20">
-          <p className="text-xs tracking-[0.3em] text-white/40 uppercase mb-4">
-            Showreel
-          </p>
-          <h1 className="text-4xl md:text-6xl font-light tracking-tight">
-            Reel
-          </h1>
-          <p className="mt-4 text-lg text-white/50 max-w-2xl">
-            Showreels y compilaciones de trabajo.
-          </p>
-        </header>
+    <main className="min-h-screen flex flex-col">
+      <div className="flex-1 pt-40 md:pt-48 pb-16 px-[var(--section-padding-x)]">
+        <div className="max-w-6xl mx-auto">
+          <header className="mb-10">
+            <h1 className="text-5xl md:text-7xl lg:text-8xl font-extralight tracking-tight">
+              Reel
+            </h1>
+          </header>
 
-        {reels.length > 0 ? (
-          <div className="space-y-16">
-            {reels.map((reel) => (
-              <article key={reel.id} className="group">
-                {reel.videoUrl && (
-                  <div className="aspect-video rounded-lg overflow-hidden bg-neutral-900">
-                    <iframe
-                      src={reel.videoUrl}
-                      className="w-full h-full"
-                      allow="autoplay; fullscreen; picture-in-picture"
-                      style={{ border: 'none' }}
-                    />
-                  </div>
-                )}
-                <div className="mt-4 flex items-baseline justify-between">
-                  <div>
-                    <h2 className="text-xl font-light">{reel.title}</h2>
+          {reels.length > 0 ? (
+            <div className="space-y-24">
+              {reels.map((reel, index) => (
+                <article key={reel.id}>
+                  <div className="flex items-center gap-4 mb-6">
+                    <span className="section-number">
+                      {String(index + 1).padStart(3, '0')}
+                    </span>
                     {reel.category && (
-                      <span className="text-xs tracking-[0.2em] text-white/40 uppercase mt-1 block">
+                      <span className="text-xs tracking-[0.15em] text-white/40 uppercase">
                         {reel.category}
                       </span>
                     )}
                   </div>
-                  {reel.date && (
-                    <span className="text-xs text-white/30">{reel.date}</span>
+
+                  {reel.videoUrl && (
+                    <div className="aspect-video bg-neutral-900 overflow-hidden">
+                      <iframe
+                        src={reel.videoUrl}
+                        className="w-full h-full"
+                        allow="autoplay; fullscreen; picture-in-picture"
+                        style={{ border: 'none' }}
+                      />
+                    </div>
                   )}
-                </div>
-                {reel.description && (
-                  <p className="mt-3 text-sm text-white/50 max-w-3xl">{reel.description}</p>
-                )}
-              </article>
-            ))}
-          </div>
-        ) : (
-          <div className="text-center py-24">
-            <p className="text-white/40 text-lg">
-              Próximamente.
-            </p>
-          </div>
-        )}
+
+                  <div className="mt-5 flex items-baseline justify-between">
+                    <h2 className="text-lg font-extralight">{reel.title}</h2>
+                    {reel.date && (
+                      <span className="text-xs text-white/30">{reel.date}</span>
+                    )}
+                  </div>
+
+                  {reel.description && (
+                    <p className="mt-3 text-sm text-white/40 max-w-3xl">{reel.description}</p>
+                  )}
+                </article>
+              ))}
+            </div>
+          ) : (
+            <div className="text-center py-24">
+              <p className="text-white/40 text-sm">Coming soon.</p>
+            </div>
+          )}
+        </div>
       </div>
 
-      <div className="mt-24">
-        <Footer />
-      </div>
+      <Footer />
     </main>
   )
 }

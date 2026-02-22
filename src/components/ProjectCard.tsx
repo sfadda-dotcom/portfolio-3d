@@ -8,78 +8,51 @@ import type { Project } from '@/lib/projects'
 interface ProjectCardProps {
   project: Project
   index: number
-  size?: 'large' | 'medium' | 'small'
+  aspect?: 'portrait' | 'landscape' | 'square'
 }
 
-export default function ProjectCard({ project, index, size = 'medium' }: ProjectCardProps) {
-  const aspectClass = size === 'large'
-    ? 'aspect-[16/10]'
-    : size === 'small'
-      ? 'aspect-square'
-      : 'aspect-video'
+const aspectClasses = {
+  portrait: 'aspect-[3/4]',
+  landscape: 'aspect-[16/10]',
+  square: 'aspect-square',
+}
 
+export default function ProjectCard({ project, index, aspect = 'landscape' }: ProjectCardProps) {
   return (
     <motion.article
-      initial={{ opacity: 0, y: 40 }}
+      initial={{ opacity: 0, y: 30 }}
       animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.6, delay: index * 0.08 }}
+      transition={{ duration: 0.6, delay: index * 0.06 }}
     >
       <Link href={`/progetti/${project.slug}`} className="block group">
         {/* Thumbnail */}
-        <div className={`relative ${aspectClass} overflow-hidden bg-neutral-900 rounded-sm`}>
+        <div className={`relative ${aspectClasses[aspect]} overflow-hidden bg-neutral-900`}>
           <Image
             src={project.thumbnail}
             alt={project.title}
             fill
-            className="object-cover transition-all duration-700 group-hover:scale-105 group-hover:opacity-80"
+            className="object-cover transition-transform duration-700 group-hover:scale-105"
           />
-
-          {/* Overlay on hover */}
-          <div className="absolute inset-0 bg-black/0 group-hover:bg-black/30 transition-colors duration-500" />
-
-          {/* Play icon if video */}
-          {project.videoUrl && (
-            <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
-              <div className="w-14 h-14 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center">
-                <svg
-                  className="w-5 h-5 text-white ml-0.5"
-                  fill="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path d="M8 5v14l11-7z" />
-                </svg>
-              </div>
-            </div>
-          )}
+          <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-500" />
         </div>
 
         {/* Info */}
         <div className="mt-3">
-          <div className="flex items-baseline justify-between gap-2">
-            <h3 className="text-base font-light tracking-tight group-hover:opacity-70 transition-opacity truncate">
-              {project.title}
-            </h3>
-            {project.date && (
-              <span className="text-xs text-white/30 shrink-0">{project.date}</span>
-            )}
-          </div>
+          <h3 className="text-sm font-light tracking-wide group-hover:opacity-70 transition-opacity">
+            {project.title}
+          </h3>
           <div className="flex items-center gap-2 mt-1">
-            {project.discipline && (
-              <span className="text-[10px] tracking-[0.15em] text-white/50 uppercase">
-                {project.discipline}
+            {project.date && (
+              <span className="text-[10px] tracking-[0.1em] text-white/35">
+                {project.date}
               </span>
             )}
-            {project.discipline && project.place && (
-              <span className="text-white/20">·</span>
+            {project.date && project.place && (
+              <span className="text-white/15">·</span>
             )}
             {project.place && (
               <span className="text-[10px] tracking-[0.1em] text-white/35">
                 {project.place}
-              </span>
-            )}
-            {!project.discipline && !project.place && project.category && (
-              <span className="text-[10px] tracking-[0.15em] text-white/50 uppercase">
-                {project.category}
               </span>
             )}
           </div>
