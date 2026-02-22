@@ -50,15 +50,18 @@ const socialLinks = [
 
 export default function ContactPage() {
   return (
-    <main className="min-h-screen pt-32 pb-16 px-8">
+    <main className="min-h-screen pt-40 md:pt-48 pb-16 px-8">
       <div className="max-w-4xl mx-auto">
         {/* Header */}
         <header className="mb-24">
-          <h1 className="text-5xl md:text-7xl font-light tracking-tight">
+          <p className="text-xs tracking-[0.3em] text-white/40 uppercase mb-4">
             Contacto
+          </p>
+          <h1 className="text-4xl md:text-6xl font-light tracking-tight">
+            Hablemos
           </h1>
-          <p className="mt-8 text-xl text-white/50 max-w-2xl">
-            ¿Tenés un proyecto en mente? Hablemos.
+          <p className="mt-4 text-lg text-white/50 max-w-2xl">
+            ¿Tenés un proyecto en mente? Escribime.
           </p>
         </header>
 

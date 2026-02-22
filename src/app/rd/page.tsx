@@ -13,13 +13,16 @@ export default async function RDPage() {
   const items = await getProjects('rd')
 
   return (
-    <main className="min-h-screen pt-32 pb-16 px-8">
+    <main className="min-h-screen pt-40 md:pt-48 pb-16 px-8">
       <div className="max-w-7xl mx-auto">
-        <header className="mb-16">
-          <h1 className="text-5xl md:text-7xl font-light tracking-tight">
+        <header className="mb-20">
+          <p className="text-xs tracking-[0.3em] text-white/40 uppercase mb-4">
+            Investigación
+          </p>
+          <h1 className="text-4xl md:text-6xl font-light tracking-tight">
             R&D
           </h1>
-          <p className="mt-6 text-white/50 text-lg max-w-2xl">
+          <p className="mt-4 text-lg text-white/50 max-w-2xl">
             Tests, simulaciones, animaciones sin render y experimentos técnicos.
           </p>
         </header>

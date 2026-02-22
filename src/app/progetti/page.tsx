@@ -32,13 +32,16 @@ export default async function ProjectsPage() {
   const categories = await getCategories('project')
 
   return (
-    <main className="min-h-screen pt-32 pb-16 px-8">
+    <main className="min-h-screen pt-40 md:pt-48 pb-16 px-8">
       <div className="max-w-7xl mx-auto">
-        <header className="mb-16">
-          <h1 className="text-5xl md:text-7xl font-light tracking-tight">
+        <header className="mb-20">
+          <p className="text-xs tracking-[0.3em] text-white/40 uppercase mb-4">
+            Portfolio
+          </p>
+          <h1 className="text-4xl md:text-6xl font-light tracking-tight">
             Proyectos
           </h1>
-          <p className="mt-6 text-white/50 text-lg max-w-2xl">
+          <p className="mt-4 text-lg text-white/50 max-w-2xl">
             Una selección de trabajos en motion design 3D, videomapping y contenido audiovisual.
           </p>
         </header>
