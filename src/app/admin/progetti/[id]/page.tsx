@@ -76,37 +76,42 @@ export default function EditProject() {
     }
   }
 
+  async function uploadSingleFile(file: File): Promise<string | null> {
+    const formData = new FormData()
+    formData.append('file', file)
+
+    const res = await fetch('/api/admin/upload', {
+      method: 'POST',
+      body: formData,
+    })
+
+    if (!res.ok) {
+      const data = await res.json().catch(() => ({}))
+      throw new Error(data.error || `Error al subir ${file.name} (${res.status})`)
+    }
+
+    const { url } = await res.json()
+    return url
+  }
+
   async function handleUpload(files: FileList | File[], target: 'thumbnail' | 'gallery') {
     setUploading(true)
     try {
-      const formData = new FormData()
-      for (const file of Array.from(files)) {
-        formData.append('file', file)
-      }
+      const fileArray = Array.from(files)
 
-      const res = await fetch('/api/admin/upload', {
-        method: 'POST',
-        body: formData,
-      })
-
-      if (!res.ok) {
-        const data = await res.json().catch(() => ({}))
-        showError(data.error || `Error al subir imagen (${res.status})`)
-        return
-      }
-
-      const { url, urls } = await res.json()
       if (target === 'thumbnail') {
-        updateField('thumbnail', url)
+        const url = await uploadSingleFile(fileArray[0])
+        if (url) updateField('thumbnail', url)
       } else {
+        const urls = await Promise.all(fileArray.map((f) => uploadSingleFile(f)))
         const gallery = [...(project?.gallery || [])]
-        for (const u of urls as string[]) {
-          gallery.push({ type: 'image', url: u, caption: '' })
+        for (const u of urls) {
+          if (u) gallery.push({ type: 'image', url: u, caption: '' })
         }
         updateField('gallery', gallery)
       }
-    } catch {
-      showError('Error de conexión al subir imagen')
+    } catch (err: any) {
+      showError(err.message || 'Error de conexión al subir imagen')
     } finally {
       setUploading(false)
     }
