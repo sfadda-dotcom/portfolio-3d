@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
+import { revalidatePath } from 'next/cache'
 import { readProjectsFromBlob, writeProjectsToBlob } from '@/lib/blob-storage'
 import type { Project } from '@/lib/projects'
 import projectsLocal from '@/data/projects.json'
@@ -49,6 +50,10 @@ export async function POST(request: NextRequest) {
 
     projects.push(newProject)
     await writeProjectsToBlob(projects)
+    revalidatePath('/')
+    revalidatePath('/progetti')
+    revalidatePath('/reel')
+    revalidatePath('/rd')
 
     return NextResponse.json(newProject, { status: 201 })
   } catch (err: any) {
@@ -87,6 +92,11 @@ export async function PUT(request: NextRequest) {
 
     projects[index] = { ...projects[index], ...updates }
     await writeProjectsToBlob(projects)
+    revalidatePath('/')
+    revalidatePath('/progetti')
+    revalidatePath(`/progetti/${projects[index].slug}`)
+    revalidatePath('/reel')
+    revalidatePath('/rd')
 
     return NextResponse.json(projects[index])
   } catch (err: any) {
@@ -120,6 +130,10 @@ export async function DELETE(request: NextRequest) {
     })
 
     await writeProjectsToBlob(filtered)
+    revalidatePath('/')
+    revalidatePath('/progetti')
+    revalidatePath('/reel')
+    revalidatePath('/rd')
 
     return NextResponse.json({ success: true })
   } catch (err: any) {

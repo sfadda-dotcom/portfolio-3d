@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
+import { revalidatePath } from 'next/cache'
 import { readProjectsFromBlob, writeProjectsToBlob } from '@/lib/blob-storage'
 import type { Project } from '@/lib/projects'
 import projectsLocal from '@/data/projects.json'
@@ -25,6 +26,10 @@ export async function POST(request: NextRequest) {
     })
 
     await writeProjectsToBlob(projects)
+    revalidatePath('/')
+    revalidatePath('/progetti')
+    revalidatePath('/reel')
+    revalidatePath('/rd')
 
     const sorted = [...projects].sort((a, b) => a.order - b.order)
     return NextResponse.json(sorted)

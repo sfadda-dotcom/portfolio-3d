@@ -3,6 +3,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { getProjectBySlug, getProjects } from '@/lib/projects'
 import Footer from '@/components/Footer'
+import GalleryLightbox from '@/components/GalleryLightbox'
 
 export const revalidate = 60
 
@@ -130,42 +131,10 @@ export default async function ProjectPage({ params }: { params: { slug: string }
         </section>
       )}
 
-      {/* Gallery — full width */}
+      {/* Gallery — random grid with lightbox */}
       {project.gallery && project.gallery.length > 0 && (
         <section className="pb-20">
-          <div className="space-y-[var(--grid-gap)]">
-            {project.gallery.map((item, index) => (
-              <div key={index} className="w-full">
-                {item.type === 'image' ? (
-                  <div className="relative w-full aspect-video bg-neutral-900">
-                    <Image
-                      src={item.url}
-                      alt={item.caption || `${project.title} — ${index + 1}`}
-                      fill
-                      className="object-cover"
-                    />
-                  </div>
-                ) : item.type === 'vimeo' || item.type === 'youtube' ? (
-                  <div className="w-full aspect-video bg-neutral-900">
-                    <iframe
-                      src={item.type === 'youtube'
-                        ? item.url.replace('watch?v=', 'embed/')
-                        : item.url
-                      }
-                      className="w-full h-full"
-                      allow="autoplay; fullscreen; picture-in-picture"
-                      style={{ border: 'none' }}
-                    />
-                  </div>
-                ) : null}
-                {item.caption && (
-                  <p className="px-[var(--section-padding-x)] mt-3 text-xs text-white/40">
-                    {item.caption}
-                  </p>
-                )}
-              </div>
-            ))}
-          </div>
+          <GalleryLightbox items={project.gallery} projectTitle={project.title} />
         </section>
       )}
 

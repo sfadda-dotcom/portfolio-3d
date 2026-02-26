@@ -70,48 +70,6 @@ export default async function StudioPage() {
             </section>
           </ScrollReveal>
 
-          <ScrollReveal>
-            <section className="mb-28">
-              <span className="section-number">004</span>
-              <h2 className="mt-4 text-xs tracking-[0.15em] uppercase text-white/40 mb-8">
-                Experience
-              </h2>
-              <div className="space-y-0">
-                {about.experience.map((exp) => (
-                  <div
-                    key={`${exp.company}-${exp.period}`}
-                    className="flex justify-between items-baseline border-b border-white/[0.08] py-5"
-                  >
-                    <div>
-                      <h3 className="text-base font-light">{exp.company}</h3>
-                      <p className="text-xs text-white/40 mt-1">{exp.role}</p>
-                    </div>
-                    <span className="text-xs text-white/30">{exp.period}</span>
-                  </div>
-                ))}
-              </div>
-            </section>
-          </ScrollReveal>
-
-          <ScrollReveal>
-            <section className="mb-28">
-              <span className="section-number">005</span>
-              <h2 className="mt-4 text-xs tracking-[0.15em] uppercase text-white/40 mb-8">
-                Education
-              </h2>
-              <div className="space-y-0">
-                {about.studies.map((study) => (
-                  <div
-                    key={study.title}
-                    className="flex justify-between items-baseline border-b border-white/[0.08] py-5"
-                  >
-                    <h3 className="text-base font-light">{study.title}</h3>
-                    <span className="text-xs text-white/40">{study.institution}</span>
-                  </div>
-                ))}
-              </div>
-            </section>
-          </ScrollReveal>
         </div>
       </div>
 

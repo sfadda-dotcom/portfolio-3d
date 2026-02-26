@@ -1,21 +1,11 @@
-import Link from 'next/link'
-
-const disciplines = [
-  '2D/3D Motion Graphics',
-  'Videomapping',
-  'VJing',
-  'Real-time Visuals',
-  'Generative Art',
-]
-
 export default function Footer() {
   const currentYear = new Date().getFullYear()
 
   return (
     <footer className="border-t border-white/[0.08] pt-16 pb-8 px-[var(--section-padding-x)]">
       <div className="max-w-7xl mx-auto">
-        {/* 3-column grid */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-12 mb-16">
+        {/* 2-column grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 mb-16">
           {/* Contact */}
           <div>
             <h4 className="text-xs tracking-[0.15em] uppercase text-white/40 mb-6">
@@ -59,20 +49,6 @@ export default function Footer() {
               >
                 LinkedIn
               </a>
-            </div>
-          </div>
-
-          {/* Disciplines */}
-          <div>
-            <h4 className="text-xs tracking-[0.15em] uppercase text-white/40 mb-6">
-              Disciplines
-            </h4>
-            <div className="flex flex-col gap-3">
-              {disciplines.map((d) => (
-                <span key={d} className="text-sm text-white/70">
-                  {d}
-                </span>
-              ))}
             </div>
           </div>
         </div>

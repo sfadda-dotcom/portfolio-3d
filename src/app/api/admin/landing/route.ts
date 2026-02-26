@@ -1,4 +1,5 @@
 import { NextResponse } from 'next/server'
+import { revalidatePath } from 'next/cache'
 import { readLandingFromBlob, writeLandingToBlob } from '@/lib/blob-storage'
 import { DEFAULT_LANDING } from '@/lib/projects'
 import type { LandingSettings } from '@/lib/projects'
@@ -28,6 +29,7 @@ export async function PUT(request: Request) {
     }
 
     await writeLandingToBlob(settings)
+    revalidatePath('/')
     return NextResponse.json(settings)
   } catch (err) {
     console.error('Error saving landing settings:', err)

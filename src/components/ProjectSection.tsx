@@ -65,8 +65,7 @@ export default function ProjectSection({ project, index }: ProjectSectionProps) 
                 </h2>
               </div>
 
-              <span className="hidden md:inline-flex items-center gap-2 text-xs tracking-[0.15em] uppercase text-white/40 group-hover:text-white/80 transition-colors shrink-0 ml-8">
-                View project
+              <span className="hidden md:inline-flex items-center text-xs text-white/0 group-hover:text-white/60 transition-colors shrink-0 ml-8">
                 <span className="group-hover:translate-x-1 transition-transform">&rarr;</span>
               </span>
             </div>

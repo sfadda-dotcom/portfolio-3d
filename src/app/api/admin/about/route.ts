@@ -1,4 +1,5 @@
 import { NextResponse } from 'next/server'
+import { revalidatePath } from 'next/cache'
 import { readAboutFromBlob, writeAboutToBlob } from '@/lib/blob-storage'
 import { DEFAULT_ABOUT } from '@/lib/projects'
 import type { AboutSettings } from '@/lib/projects'
@@ -29,6 +30,7 @@ export async function PUT(request: Request) {
     }
 
     await writeAboutToBlob(settings)
+    revalidatePath('/studio')
     return NextResponse.json(settings)
   } catch (err) {
     console.error('Error saving about settings:', err)
