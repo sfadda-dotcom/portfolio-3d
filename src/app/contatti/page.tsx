@@ -57,7 +57,7 @@ export default function ContactPage() {
                     Vimeo
                   </a>
                   <a
-                    href="https://linkedin.com/in/manuelguillin"
+                    href="https://www.linkedin.com/in/manuel-guillin-1726b1138/"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="text-sm text-white/70 hover:text-white transition-colors"
