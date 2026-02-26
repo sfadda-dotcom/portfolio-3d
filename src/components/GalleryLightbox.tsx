@@ -9,16 +9,6 @@ interface GalleryLightboxProps {
   projectTitle: string
 }
 
-// Alternating aspect ratios for a dynamic, random-looking layout (all col-span-1 to avoid gaps)
-const aspectVariants = [
-  'pb-[75%]',     // 4:3
-  'pb-[100%]',    // square
-  'pb-[60%]',     // wide
-  'pb-[120%]',    // tall
-  'pb-[56.25%]',  // 16:9
-  'pb-[85%]',     // near-square
-] as const
-
 function isGif(url: string): boolean {
   return url.toLowerCase().endsWith('.gif')
 }
@@ -64,65 +54,63 @@ export default function GalleryLightbox({ items, projectTitle }: GalleryLightbox
 
   return (
     <>
-      {/* Gallery grid with varying aspect ratios */}
-      <div className="grid grid-cols-2 md:grid-cols-3 gap-3 md:gap-4 px-[var(--section-padding-x)]">
-        {items.map((item, index) => {
-          const aspectClass = aspectVariants[index % aspectVariants.length]
-
-          return (
-            <div
-              key={index}
-              className="cursor-pointer group relative overflow-hidden bg-neutral-900"
-              onClick={() => openLightbox(index)}
-            >
-              {item.type === 'image' ? (
-                <div className={`relative w-full h-0 ${aspectClass}`}>
-                  {isGif(item.url) ? (
-                    /* eslint-disable-next-line @next/next/no-img-element */
-                    <img
-                      src={item.url}
-                      alt={item.caption || `${projectTitle} — ${index + 1}`}
-                      className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                    />
-                  ) : (
-                    <Image
-                      src={item.url}
-                      alt={item.caption || `${projectTitle} — ${index + 1}`}
-                      fill
-                      className="object-cover transition-transform duration-500 group-hover:scale-105"
-                    />
-                  )}
-                </div>
+      {/* Masonry gallery using CSS columns — no gaps between items */}
+      <div
+        className="px-[var(--section-padding-x)]"
+        style={{ columnCount: 2, columnGap: '12px' }}
+      >
+        {items.map((item, index) => (
+          <div
+            key={index}
+            className="cursor-pointer group relative overflow-hidden bg-neutral-900 mb-3"
+            style={{ breakInside: 'avoid' }}
+            onClick={() => openLightbox(index)}
+          >
+            {item.type === 'image' ? (
+              isGif(item.url) ? (
+                /* eslint-disable-next-line @next/next/no-img-element */
+                <img
+                  src={item.url}
+                  alt={item.caption || `${projectTitle} — ${index + 1}`}
+                  className="w-full h-auto block transition-transform duration-500 group-hover:scale-105"
+                />
               ) : (
-                <div className="relative w-full h-0 pb-[56.25%]">
-                  <iframe
-                    src={
-                      item.type === 'youtube'
-                        ? item.url.replace('watch?v=', 'embed/')
-                        : item.url
-                    }
-                    className="absolute inset-0 w-full h-full"
-                    allow="autoplay; fullscreen; picture-in-picture"
-                    style={{ border: 'none' }}
-                  />
-                </div>
-              )}
-
-              {/* Hover overlay */}
-              <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-300 flex items-center justify-center">
-                <span className="text-white/0 group-hover:text-white/80 transition-colors text-xs tracking-[0.15em] uppercase">
-                  {item.type === 'image' ? '⤢' : '▶'}
-                </span>
+                /* eslint-disable-next-line @next/next/no-img-element */
+                <img
+                  src={item.url}
+                  alt={item.caption || `${projectTitle} — ${index + 1}`}
+                  className="w-full h-auto block transition-transform duration-500 group-hover:scale-105"
+                />
+              )
+            ) : (
+              <div className="relative w-full h-0 pb-[56.25%]">
+                <iframe
+                  src={
+                    item.type === 'youtube'
+                      ? item.url.replace('watch?v=', 'embed/')
+                      : item.url
+                  }
+                  className="absolute inset-0 w-full h-full"
+                  allow="autoplay; fullscreen; picture-in-picture"
+                  style={{ border: 'none' }}
+                />
               </div>
+            )}
 
-              {item.caption && (
-                <p className="absolute bottom-0 left-0 right-0 px-3 py-2 text-[10px] text-white/50 bg-gradient-to-t from-black/60 to-transparent">
-                  {item.caption}
-                </p>
-              )}
+            {/* Hover overlay */}
+            <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-300 flex items-center justify-center">
+              <span className="text-white/0 group-hover:text-white/80 transition-colors text-xs tracking-[0.15em] uppercase">
+                {item.type === 'image' ? '⤢' : '▶'}
+              </span>
             </div>
-          )
-        })}
+
+            {item.caption && (
+              <p className="absolute bottom-0 left-0 right-0 px-3 py-2 text-[10px] text-white/50 bg-gradient-to-t from-black/60 to-transparent">
+                {item.caption}
+              </p>
+            )}
+          </div>
+        ))}
       </div>
 
       {/* Lightbox overlay */}
@@ -166,24 +154,12 @@ export default function GalleryLightbox({ items, projectTitle }: GalleryLightbox
             onClick={(e) => e.stopPropagation()}
           >
             {currentItem.type === 'image' ? (
-              isGif(currentItem.url) ? (
-                /* eslint-disable-next-line @next/next/no-img-element */
-                <img
-                  src={currentItem.url}
-                  alt={currentItem.caption || projectTitle}
-                  className="max-w-[90vw] max-h-[85vh] object-contain"
-                />
-              ) : (
-                <div className="relative" style={{ width: '80vw', height: '80vh' }}>
-                  <Image
-                    src={currentItem.url}
-                    alt={currentItem.caption || projectTitle}
-                    fill
-                    className="object-contain"
-                    unoptimized
-                  />
-                </div>
-              )
+              /* eslint-disable-next-line @next/next/no-img-element */
+              <img
+                src={currentItem.url}
+                alt={currentItem.caption || projectTitle}
+                className="max-w-[90vw] max-h-[85vh] object-contain"
+              />
             ) : (
               <div style={{ width: '80vw', height: '80vh' }}>
                 <iframe
