@@ -180,14 +180,6 @@ export default function EditProject() {
             {saved && (
               <span className="text-xs text-green-400">Guardado ✓</span>
             )}
-            <button
-              onClick={handleSave}
-              disabled={saving}
-              className="text-sm bg-white text-black px-4 py-1.5 rounded font-medium
-                         hover:bg-white/90 transition-colors disabled:opacity-50"
-            >
-              {saving ? 'Guardando...' : 'Guardar'}
-            </button>
           </div>
         </div>
       </header>
@@ -234,7 +226,7 @@ export default function EditProject() {
             <input
               ref={fileInputRef}
               type="file"
-              accept="image/*"
+              accept="image/jpeg,image/png,image/webp,image/gif,image/svg+xml,.gif,.jpg,.jpeg,.png,.webp,.svg"
               className="hidden"
               onChange={(e) => {
                 const files = e.target.files
@@ -404,7 +396,7 @@ export default function EditProject() {
             <input
               ref={galleryInputRef}
               type="file"
-              accept="image/*"
+              accept="image/jpeg,image/png,image/webp,image/gif,image/svg+xml,.gif,.jpg,.jpeg,.png,.webp,.svg"
               multiple
               className="hidden"
               onChange={(e) => {

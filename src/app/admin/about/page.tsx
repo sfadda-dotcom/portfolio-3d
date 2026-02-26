@@ -160,14 +160,6 @@ export default function EditAbout() {
           <div className="flex items-center gap-3">
             {error && <span className="text-xs text-red-400">{error}</span>}
             {saved && <span className="text-xs text-green-400">Guardado ✓</span>}
-            <button
-              onClick={handleSave}
-              disabled={saving}
-              className="text-sm bg-white text-black px-4 py-1.5 rounded font-medium
-                         hover:bg-white/90 transition-colors disabled:opacity-50"
-            >
-              {saving ? 'Guardando...' : 'Guardar'}
-            </button>
           </div>
         </div>
       </header>

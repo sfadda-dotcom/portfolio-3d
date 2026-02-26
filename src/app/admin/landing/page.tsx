@@ -251,7 +251,7 @@ export default function EditLanding() {
             <input
               ref={fileInputRef}
               type="file"
-              accept="image/*"
+              accept="image/jpeg,image/png,image/webp,image/gif,image/svg+xml,.gif,.jpg,.jpeg,.png,.webp,.svg"
               className="hidden"
               onChange={(e) => {
                 const file = e.target.files?.[0]

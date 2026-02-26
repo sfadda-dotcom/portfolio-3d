@@ -16,8 +16,8 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: 'Formato no soportado. Formatos permitidos: JPG, PNG, WebP, GIF, SVG' }, { status: 400 })
     }
 
-    if (file.size > 10 * 1024 * 1024) {
-      return NextResponse.json({ error: 'Archivo demasiado grande (máx 10MB)' }, { status: 400 })
+    if (file.size > 25 * 1024 * 1024) {
+      return NextResponse.json({ error: 'Archivo demasiado grande (máx 25MB)' }, { status: 400 })
     }
 
     const url = await uploadImage(file, 'portfolio')

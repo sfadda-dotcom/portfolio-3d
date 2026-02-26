@@ -9,14 +9,14 @@ interface GalleryLightboxProps {
   projectTitle: string
 }
 
-// Predefined size classes for random-looking layout
-const sizeVariants = [
-  'col-span-1',           // small
-  'col-span-1',           // small
-  'col-span-2',           // wide
-  'col-span-1 row-span-2', // tall
-  'col-span-2',           // wide
-  'col-span-1',           // small
+// Alternating aspect ratios for a dynamic, random-looking layout (all col-span-1 to avoid gaps)
+const aspectVariants = [
+  'pb-[75%]',     // 4:3
+  'pb-[100%]',    // square
+  'pb-[60%]',     // wide
+  'pb-[120%]',    // tall
+  'pb-[56.25%]',  // 16:9
+  'pb-[85%]',     // near-square
 ] as const
 
 function isGif(url: string): boolean {
@@ -64,19 +64,19 @@ export default function GalleryLightbox({ items, projectTitle }: GalleryLightbox
 
   return (
     <>
-      {/* Gallery grid with random sizes */}
+      {/* Gallery grid with varying aspect ratios */}
       <div className="grid grid-cols-2 md:grid-cols-3 gap-3 md:gap-4 px-[var(--section-padding-x)]">
         {items.map((item, index) => {
-          const sizeClass = sizeVariants[index % sizeVariants.length]
+          const aspectClass = aspectVariants[index % aspectVariants.length]
 
           return (
             <div
               key={index}
-              className={`${sizeClass} cursor-pointer group relative overflow-hidden bg-neutral-900`}
+              className="cursor-pointer group relative overflow-hidden bg-neutral-900"
               onClick={() => openLightbox(index)}
             >
               {item.type === 'image' ? (
-                <div className="relative w-full h-0 pb-[75%]">
+                <div className={`relative w-full h-0 ${aspectClass}`}>
                   {isGif(item.url) ? (
                     /* eslint-disable-next-line @next/next/no-img-element */
                     <img
