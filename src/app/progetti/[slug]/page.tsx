@@ -36,14 +36,7 @@ export default async function ProjectPage({ params }: { params: { slug: string }
       {/* Hero — full viewport, image/video only */}
       <section className="relative h-screen overflow-hidden">
         <div className="absolute inset-0">
-          {project.videoUrl ? (
-            <iframe
-              src={`${project.videoUrl}?background=1&autoplay=1&loop=1&muted=1`}
-              className="w-full h-full"
-              allow="autoplay; fullscreen"
-              style={{ border: 'none' }}
-            />
-          ) : (
+          {project.thumbnail ? (
             <Image
               src={project.thumbnail}
               alt={project.title}
@@ -51,6 +44,8 @@ export default async function ProjectPage({ params }: { params: { slug: string }
               className="object-cover"
               priority
             />
+          ) : (
+            <div className="w-full h-full bg-neutral-900" />
           )}
           <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0a] via-transparent to-transparent" />
         </div>
