@@ -163,14 +163,40 @@
   },
   {
     "id": "1772483466976",
-    "slug": "nuevo-proyecto",
-    "title": "Nuevo proyecto",
+    "slug": "Qannati",
+    "title": "Qannati ",
     "category": "",
     "description": "",
-    "thumbnail": "",
-    "videoUrl": null,
-    "gallery": [],
-    "featured": false,
+    "thumbnail": "/uploads/1772483836003-ptub51.png",
+    "videoUrl": "https://player.vimeo.com/video/753935523?h=0d42606ae4",
+    "gallery": [
+      {
+        "type": "image",
+        "url": "/uploads/1772483797342-u1nn18.png",
+        "caption": ""
+      },
+      {
+        "type": "image",
+        "url": "/uploads/1772483802970-t0e34x.png",
+        "caption": ""
+      },
+      {
+        "type": "image",
+        "url": "/uploads/1772483811722-341wln.png",
+        "caption": ""
+      },
+      {
+        "type": "image",
+        "url": "/uploads/1772483817006-dx7f69.png",
+        "caption": ""
+      },
+      {
+        "type": "image",
+        "url": "/uploads/1772483820836-y17u1h.png",
+        "caption": ""
+      }
+    ],
+    "featured": true,
     "order": 5,
     "type": "project",
     "discipline": "",
