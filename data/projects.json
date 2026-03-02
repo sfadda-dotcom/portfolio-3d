@@ -96,11 +96,11 @@
   },
   {
     "id": "1772467262037",
-    "slug": "nuevo-proyecto",
-    "title": "Nuevo proyecto",
+    "slug": "Museo-FCB",
+    "title": "Museo FCB",
     "category": "",
     "description": "",
-    "thumbnail": "",
+    "thumbnail": "/uploads/1772467293998-zbaf4r.png",
     "videoUrl": null,
     "gallery": [],
     "featured": false,
@@ -108,6 +108,6 @@
     "type": "project",
     "discipline": "",
     "place": "",
-    "date": ""
+    "date": "2023"
   }
 ]
