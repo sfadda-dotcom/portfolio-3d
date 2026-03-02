@@ -80,11 +80,11 @@
   },
   {
     "id": "1772467059651",
-    "slug": "nuevo-proyecto",
-    "title": "Nuevo proyecto",
+    "slug": "Montserrat",
+    "title": "Montserrat",
     "category": "",
     "description": "",
-    "thumbnail": "",
+    "thumbnail": "/uploads/1772467092052-rdsw1l.jpg",
     "videoUrl": null,
     "gallery": [],
     "featured": false,
@@ -92,6 +92,6 @@
     "type": "project",
     "discipline": "",
     "place": "",
-    "date": ""
+    "date": "2025"
   }
 ]
