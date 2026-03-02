@@ -16,18 +16,6 @@
     "date": ""
   },
   {
-    "id": "4",
-    "slug": "3d-reel",
-    "title": "3D Animation Reel",
-    "category": "2D/3D Motion Graphics",
-    "description": "Colores, formas, texturas, sentimientos, son cruciales para la comunicación.",
-    "thumbnail": "https://images.unsplash.com/photo-1633356122544-f134324a6cee?w=1200&q=80",
-    "videoUrl": "https://player.vimeo.com/video/298254408",
-    "gallery": [],
-    "featured": false,
-    "order": 2
-  },
-  {
     "id": "1772464181334",
     "slug": "San-Nicolas",
     "title": "San Nicolas ",
@@ -68,7 +56,7 @@
       }
     ],
     "featured": false,
-    "order": 3,
+    "order": 2,
     "type": "project",
     "discipline": "",
     "place": "",
@@ -84,7 +72,7 @@
     "videoUrl": null,
     "gallery": [],
     "featured": false,
-    "order": 4,
+    "order": 3,
     "type": "project",
     "discipline": "",
     "place": "",
