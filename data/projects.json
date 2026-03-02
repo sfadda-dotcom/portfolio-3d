@@ -160,5 +160,21 @@
     "discipline": "",
     "place": "",
     "date": "2023"
+  },
+  {
+    "id": "1772483466976",
+    "slug": "nuevo-proyecto",
+    "title": "Nuevo proyecto",
+    "category": "",
+    "description": "",
+    "thumbnail": "",
+    "videoUrl": null,
+    "gallery": [],
+    "featured": false,
+    "order": 5,
+    "type": "project",
+    "discipline": "",
+    "place": "",
+    "date": ""
   }
 ]
