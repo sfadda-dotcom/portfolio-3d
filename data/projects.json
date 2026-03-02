@@ -16,18 +16,6 @@
     "date": ""
   },
   {
-    "id": "2",
-    "slug": "vjing",
-    "title": "Escuchando la luz",
-    "category": "VJing",
-    "description": "Con el avance de la tecnología la vida se ha transformado, permitiéndonos encontrar nuevas formas de expresión en el terreno artístico hasta lo más inimaginado. Integración de sonidos generando imágenes, movimientos captados por sensores, generar nuevos climas, contar un relato. El arte del VJing es intensificar sensaciones brindadas por su inseparable compañero, la música.",
-    "thumbnail": "https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=1200&q=80",
-    "videoUrl": null,
-    "gallery": [],
-    "featured": true,
-    "order": 2
-  },
-  {
     "id": "4",
     "slug": "3d-reel",
     "title": "3D Animation Reel",
@@ -37,7 +25,7 @@
     "videoUrl": "https://player.vimeo.com/video/298254408",
     "gallery": [],
     "featured": false,
-    "order": 3
+    "order": 2
   },
   {
     "id": "1772464181334",
@@ -80,7 +68,7 @@
       }
     ],
     "featured": false,
-    "order": 4,
+    "order": 3,
     "type": "project",
     "discipline": "",
     "place": "",
@@ -96,7 +84,7 @@
     "videoUrl": null,
     "gallery": [],
     "featured": false,
-    "order": 5,
+    "order": 4,
     "type": "project",
     "discipline": "",
     "place": "",
