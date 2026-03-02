@@ -93,5 +93,21 @@
     "discipline": "",
     "place": "",
     "date": ""
+  },
+  {
+    "id": "1772466323634",
+    "slug": "nuevo-test",
+    "title": "Nuevo test",
+    "category": "",
+    "description": "",
+    "thumbnail": "",
+    "videoUrl": null,
+    "gallery": [],
+    "featured": false,
+    "order": 1,
+    "type": "rd",
+    "discipline": "",
+    "place": "",
+    "date": ""
   }
 ]
