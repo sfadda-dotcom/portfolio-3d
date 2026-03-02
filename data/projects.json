@@ -93,5 +93,21 @@
     "discipline": "",
     "place": "",
     "date": "2025"
+  },
+  {
+    "id": "1772467262037",
+    "slug": "nuevo-proyecto",
+    "title": "Nuevo proyecto",
+    "category": "",
+    "description": "",
+    "thumbnail": "",
+    "videoUrl": null,
+    "gallery": [],
+    "featured": false,
+    "order": 4,
+    "type": "project",
+    "discipline": "",
+    "place": "",
+    "date": ""
   }
 ]
