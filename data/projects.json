@@ -1,15 +1,19 @@
 [
   {
-    "id": "1",
-    "slug": "motion-graphics-reel",
-    "title": "Traigámoslo a la vida",
-    "category": "2D/3D Motion Graphics",
-    "description": "Toda nuestra vida es movimiento. Ni la sociedad, ni la naturaleza se quedan paradas en ningún momento. Todo se mueve y este movimiento tiene un fin. Bajo las tres dimensiones que rigen el mundo físico, manipulamos la cuarta intangible, el tiempo. Creando así la ilusión de movimiento.",
-    "thumbnail": "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=1200&q=80",
-    "videoUrl": "https://player.vimeo.com/video/535480724",
+    "id": "1772466323634",
+    "slug": "nuevo-test",
+    "title": "Nuevo test",
+    "category": "",
+    "description": "",
+    "thumbnail": "",
+    "videoUrl": null,
     "gallery": [],
-    "featured": true,
-    "order": 1
+    "featured": false,
+    "order": 1,
+    "type": "rd",
+    "discipline": "",
+    "place": "",
+    "date": ""
   },
   {
     "id": "2",
@@ -90,22 +94,6 @@
     "featured": false,
     "order": 5,
     "type": "project",
-    "discipline": "",
-    "place": "",
-    "date": ""
-  },
-  {
-    "id": "1772466323634",
-    "slug": "nuevo-test",
-    "title": "Nuevo test",
-    "category": "",
-    "description": "",
-    "thumbnail": "",
-    "videoUrl": null,
-    "gallery": [],
-    "featured": false,
-    "order": 1,
-    "type": "rd",
     "discipline": "",
     "place": "",
     "date": ""
