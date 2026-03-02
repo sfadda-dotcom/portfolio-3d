@@ -37,8 +37,11 @@ export async function POST(request: NextRequest) {
       )
     }
 
-    if (file.size > 25 * 1024 * 1024) {
-      return NextResponse.json({ error: 'File troppo grande (max 25MB)' }, { status: 400 })
+    if (file.size > 4 * 1024 * 1024) {
+      return NextResponse.json(
+        { error: `File troppo grande (${(file.size / 1024 / 1024).toFixed(1)} MB). Il limite è 4 MB. Comprimi l'immagine o usa JPG/WebP.` },
+        { status: 400 }
+      )
     }
 
     // Override file type if browser didn't detect it correctly

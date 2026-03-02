@@ -109,6 +109,38 @@ async function ghWriteFile(
   }
 }
 
+/** Create a NEW file on GitHub (skip SHA lookup — faster for uploads). */
+async function ghCreateFile(
+  path: string,
+  content: string | Buffer,
+  message: string
+): Promise<void> {
+  const { token, repo, branch } = getGitHubConfig()
+
+  const base64 =
+    typeof content === 'string'
+      ? Buffer.from(content).toString('base64')
+      : content.toString('base64')
+
+  const res = await fetch(
+    `https://api.github.com/repos/${repo}/contents/${path}`,
+    {
+      method: 'PUT',
+      headers: {
+        Authorization: `Bearer ${token}`,
+        Accept: 'application/vnd.github.v3+json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ message, content: base64, branch }),
+    }
+  )
+
+  if (!res.ok) {
+    const err = await res.json()
+    throw new Error(`GitHub API error: ${err.message || res.statusText}`)
+  }
+}
+
 // ─── Projects ────────────────────────────────────────────────────────────────
 
 /** Read projects from GitHub repo. Returns null if not configured or not found. */
@@ -198,6 +230,14 @@ export async function uploadImage(
     throw new Error('GitHub storage not configured. Set GITHUB_TOKEN and GITHUB_REPO.')
   }
 
+  // Check file size — Vercel serverless functions accept max ~4.5 MB request body
+  if (file.size > 4 * 1024 * 1024) {
+    throw new Error(
+      `File troppo grande per l'upload (${(file.size / 1024 / 1024).toFixed(1)} MB). ` +
+      `Il limite è 4 MB. Comprimi l'immagine o usa un formato più leggero (WebP/JPG).`
+    )
+  }
+
   const ext = file.name.split('.').pop() || 'jpg'
   const filename = `${Date.now()}-${Math.random().toString(36).slice(2, 8)}.${ext}`
   const repoPath = `public/uploads/${filename}`
@@ -205,7 +245,8 @@ export async function uploadImage(
   const arrayBuffer = await file.arrayBuffer()
   const buffer = Buffer.from(arrayBuffer)
 
-  await ghWriteFile(repoPath, buffer, `Upload image: ${filename}`)
+  // Use direct create (skip SHA lookup since filename is unique)
+  await ghCreateFile(repoPath, buffer, `Upload image: ${filename}`)
 
   // Return the public path (served by Next.js from /public)
   return `/uploads/${filename}`
