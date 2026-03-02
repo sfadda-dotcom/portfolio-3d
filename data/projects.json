@@ -116,7 +116,23 @@
     "description": "",
     "thumbnail": "/uploads/1772467092052-rdsw1l.jpg",
     "videoUrl": null,
-    "gallery": [],
+    "gallery": [
+      {
+        "type": "image",
+        "url": "/uploads/1772484258530-m5pcn0.png",
+        "caption": ""
+      },
+      {
+        "type": "image",
+        "url": "/uploads/1772484259664-7jhd2k.png",
+        "caption": ""
+      },
+      {
+        "type": "image",
+        "url": "/uploads/1772484258848-wxojwi.png",
+        "caption": ""
+      }
+    ],
     "featured": false,
     "order": 3,
     "type": "project",
