@@ -102,7 +102,23 @@
     "description": "",
     "thumbnail": "/uploads/1772467293998-zbaf4r.png",
     "videoUrl": null,
-    "gallery": [],
+    "gallery": [
+      {
+        "type": "image",
+        "url": "/uploads/1772471350148-wph647.jpg",
+        "caption": ""
+      },
+      {
+        "type": "image",
+        "url": "/uploads/1772471349657-z3es99.jpg",
+        "caption": ""
+      },
+      {
+        "type": "image",
+        "url": "/uploads/1772471354576-bp9ytm.png",
+        "caption": ""
+      }
+    ],
     "featured": false,
     "order": 4,
     "type": "project",
