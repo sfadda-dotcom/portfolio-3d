@@ -34,9 +34,9 @@ export async function POST(request: NextRequest) {
     const sorted = [...projects].sort((a, b) => a.order - b.order)
     return NextResponse.json(sorted)
   } catch (err: any) {
-    const message = err?.message?.includes('BLOB_READ_WRITE_TOKEN')
-      ? 'Storage no configurado. Configura BLOB_READ_WRITE_TOKEN en Vercel.'
-      : `Error al reordenar: ${err?.message || 'Error desconocido'}`
+    const message = err?.message?.includes('GitHub')
+      ? 'Storage non configurato. Configura GITHUB_TOKEN e GITHUB_REPO nelle variabili d\'ambiente di Vercel.'
+      : `Errore nel riordino: ${err?.message || 'Errore sconosciuto'}`
     return NextResponse.json({ error: message }, { status: 500 })
   }
 }

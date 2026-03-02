@@ -57,9 +57,9 @@ export async function POST(request: NextRequest) {
 
     return NextResponse.json(newProject, { status: 201 })
   } catch (err: any) {
-    const message = err?.message?.includes('BLOB_READ_WRITE_TOKEN')
-      ? 'Storage no configurado. Configura BLOB_READ_WRITE_TOKEN en las variables de entorno de Vercel.'
-      : `Error al crear: ${err?.message || 'Error desconocido'}`
+    const message = err?.message?.includes('GitHub')
+      ? 'Storage non configurato. Configura GITHUB_TOKEN e GITHUB_REPO nelle variabili d\'ambiente di Vercel.'
+      : `Errore nella creazione: ${err?.message || 'Errore sconosciuto'}`
     return NextResponse.json({ error: message }, { status: 500 })
   }
 }
@@ -100,9 +100,9 @@ export async function PUT(request: NextRequest) {
 
     return NextResponse.json(projects[index])
   } catch (err: any) {
-    const message = err?.message?.includes('BLOB_READ_WRITE_TOKEN')
-      ? 'Storage no configurado. Configura BLOB_READ_WRITE_TOKEN en las variables de entorno de Vercel.'
-      : `Error al guardar: ${err?.message || 'Error desconocido'}`
+    const message = err?.message?.includes('GitHub')
+      ? 'Storage non configurato. Configura GITHUB_TOKEN e GITHUB_REPO nelle variabili d\'ambiente di Vercel.'
+      : `Errore nel salvataggio: ${err?.message || 'Errore sconosciuto'}`
     return NextResponse.json({ error: message }, { status: 500 })
   }
 }
@@ -137,9 +137,9 @@ export async function DELETE(request: NextRequest) {
 
     return NextResponse.json({ success: true })
   } catch (err: any) {
-    const message = err?.message?.includes('BLOB_READ_WRITE_TOKEN')
-      ? 'Storage no configurado. Configura BLOB_READ_WRITE_TOKEN en las variables de entorno de Vercel.'
-      : `Error al eliminar: ${err?.message || 'Error desconocido'}`
+    const message = err?.message?.includes('GitHub')
+      ? 'Storage non configurato. Configura GITHUB_TOKEN e GITHUB_REPO nelle variabili d\'ambiente di Vercel.'
+      : `Errore nell'eliminazione: ${err?.message || 'Errore sconosciuto'}`
     return NextResponse.json({ error: message }, { status: 500 })
   }
 }

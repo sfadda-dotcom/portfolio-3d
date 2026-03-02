@@ -15,14 +15,14 @@ function getMimeType(filename: string): string | null {
   return map[ext || ''] || null
 }
 
-/** POST /api/admin/upload — Upload an image file */
+/** POST /api/admin/upload — Upload an image file via GitHub */
 export async function POST(request: NextRequest) {
   try {
     const formData = await request.formData()
     const file = formData.get('file') as File | null
 
     if (!file) {
-      return NextResponse.json({ error: 'No se envió ningún archivo' }, { status: 400 })
+      return NextResponse.json({ error: 'Nessun file inviato' }, { status: 400 })
     }
 
     // Determine MIME type: trust file.type first, fall back to extension
@@ -32,13 +32,13 @@ export async function POST(request: NextRequest) {
     if (!detectedType || !allowedTypes.includes(detectedType)) {
       console.error(`Upload rejected: file.type="${file.type}", name="${file.name}", detectedType="${detectedType}"`)
       return NextResponse.json(
-        { error: `Formato no soportado (${file.type || 'desconocido'}). Formatos permitidos: JPG, PNG, WebP, GIF, SVG` },
+        { error: `Formato non supportato (${file.type || 'sconosciuto'}). Formati ammessi: JPG, PNG, WebP, GIF, SVG` },
         { status: 400 }
       )
     }
 
     if (file.size > 25 * 1024 * 1024) {
-      return NextResponse.json({ error: 'Archivo demasiado grande (máx 25MB)' }, { status: 400 })
+      return NextResponse.json({ error: 'File troppo grande (max 25MB)' }, { status: 400 })
     }
 
     // Override file type if browser didn't detect it correctly
@@ -48,12 +48,15 @@ export async function POST(request: NextRequest) {
 
     const url = await uploadImage(uploadFile, 'portfolio')
 
-    return NextResponse.json({ url })
+    return NextResponse.json({
+      url,
+      message: 'Immagine caricata. Il sito si aggiornerà in 1-2 minuti.',
+    })
   } catch (err: any) {
     console.error('Upload error:', err)
-    const message = err?.message?.includes('BLOB_READ_WRITE_TOKEN')
-      ? 'Storage no configurado. Configura BLOB_READ_WRITE_TOKEN en Vercel.'
-      : `Error al subir: ${err?.message || 'Error desconocido'}`
+    const message = err?.message?.includes('GitHub')
+      ? 'GitHub storage non configurato. Configura GITHUB_TOKEN e GITHUB_REPO nelle variabili d\'ambiente di Vercel.'
+      : `Errore upload: ${err?.message || 'Errore sconosciuto'}`
     return NextResponse.json({ error: message }, { status: 500 })
   }
 }

@@ -7,9 +7,9 @@ export async function POST() {
     await seedBlobFromLocal()
     return NextResponse.json({ success: true, message: 'Dati inizializzati su Blob' })
   } catch (err: any) {
-    const message = err?.message?.includes('BLOB_READ_WRITE_TOKEN')
-      ? 'Storage no configurado. Configura BLOB_READ_WRITE_TOKEN en las variables de entorno de Vercel.'
-      : `Error al inicializar datos: ${err?.message || 'Error desconocido'}`
+    const message = err?.message?.includes('GitHub')
+      ? 'Storage non configurato. Configura GITHUB_TOKEN e GITHUB_REPO nelle variabili d\'ambiente di Vercel.'
+      : `Errore nell'inizializzazione dati: ${err?.message || 'Errore sconosciuto'}`
     return NextResponse.json({ error: message }, { status: 500 })
   }
 }
