@@ -196,7 +196,7 @@
         "caption": ""
       }
     ],
-    "featured": true,
+    "featured": false,
     "order": 5,
     "type": "project",
     "discipline": "",
