@@ -68,5 +68,21 @@
     "discipline": "",
     "place": "",
     "date": ""
+  },
+  {
+    "id": "1772464272292",
+    "slug": "nuevo-proyecto-mm9bgpes",
+    "title": "Nuevo proyecto",
+    "category": "",
+    "description": "",
+    "thumbnail": "",
+    "videoUrl": null,
+    "gallery": [],
+    "featured": false,
+    "order": 6,
+    "type": "project",
+    "discipline": "",
+    "place": "",
+    "date": ""
   }
 ]
