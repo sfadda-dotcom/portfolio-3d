@@ -28,18 +28,6 @@
     "order": 2
   },
   {
-    "id": "3",
-    "slug": "videomapping",
-    "title": "Paredes que hablan",
-    "category": "Videomapping",
-    "description": "Todo lugar tiene una historia, todo es un lienzo a completar. Como modernas sombras chinas, reflejamos historias sobre edificios para personificar su pasado, presente y futuro.",
-    "thumbnail": "https://images.unsplash.com/photo-1504384308090-c894fdcc538d?w=1200&q=80",
-    "videoUrl": null,
-    "gallery": [],
-    "featured": true,
-    "order": 3
-  },
-  {
     "id": "4",
     "slug": "3d-reel",
     "title": "3D Animation Reel",
@@ -49,7 +37,7 @@
     "videoUrl": "https://player.vimeo.com/video/298254408",
     "gallery": [],
     "featured": false,
-    "order": 4
+    "order": 3
   },
   {
     "id": "1772464181334",
@@ -92,7 +80,7 @@
       }
     ],
     "featured": false,
-    "order": 5,
+    "order": 4,
     "type": "project",
     "discipline": "",
     "place": "",
@@ -108,7 +96,7 @@
     "videoUrl": null,
     "gallery": [],
     "featured": false,
-    "order": 6,
+    "order": 5,
     "type": "project",
     "discipline": "",
     "place": "",
