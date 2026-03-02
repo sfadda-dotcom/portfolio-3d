@@ -53,9 +53,15 @@
     "title": "Nuevo proyecto",
     "category": "",
     "description": "",
-    "thumbnail": "",
+    "thumbnail": "/uploads/1772464235108-v9lzqy.jpg",
     "videoUrl": null,
-    "gallery": [],
+    "gallery": [
+      {
+        "type": "image",
+        "url": "/uploads/1772464240266-v0nlbh.jpg",
+        "caption": ""
+      }
+    ],
     "featured": false,
     "order": 5,
     "type": "project",
