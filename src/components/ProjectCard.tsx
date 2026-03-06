@@ -26,7 +26,7 @@ export default function ProjectCard({ project, index, aspect = 'landscape' }: Pr
     >
       <Link href={`/progetti/${project.slug}`} className="block group">
         {/* Thumbnail */}
-        <div className={`relative ${aspectClasses[aspect]} overflow-hidden bg-neutral-900`}>
+        <div className={`relative ${aspectClasses[aspect]} overflow-hidden bg-black`}>
           <Image
             src={project.thumbnail}
             alt={project.title}

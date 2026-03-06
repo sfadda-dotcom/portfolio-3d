@@ -122,7 +122,7 @@ export default function EditLanding() {
         {/* Preview */}
         <section>
           <label className="block text-xs text-[#737373] mb-3">Vista previa del Hero</label>
-          <div className="relative aspect-video rounded-lg overflow-hidden bg-neutral-900 border border-white/5">
+          <div className="relative aspect-video rounded-lg overflow-hidden bg-black border border-white/5">
             {/* Background */}
             {settings.heroVideoUrl ? (
               <iframe
@@ -138,7 +138,7 @@ export default function EditLanding() {
                 className="absolute inset-0 w-full h-full object-cover"
               />
             ) : (
-              <div className="absolute inset-0 bg-gradient-to-b from-black via-neutral-950 to-black" />
+              <div className="absolute inset-0 bg-gradient-to-b from-black via-black to-black" />
             )}
             {/* Overlay */}
             <div className="absolute inset-0 bg-black/40" />

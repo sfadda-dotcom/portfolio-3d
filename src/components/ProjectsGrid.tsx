@@ -82,7 +82,7 @@ export default function ProjectsGrid({ projects, categories }: ProjectsGridProps
                 transition={{ duration: 0.5, delay: index * 0.05 }}
               >
                 <Link href={`/progetti/${project.slug}`} className="block group">
-                  <div className={`relative ${aspectClasses[aspect]} overflow-hidden bg-neutral-900`}>
+                  <div className={`relative ${aspectClasses[aspect]} overflow-hidden bg-black`}>
                     <Image
                       src={project.thumbnail}
                       alt={project.title}

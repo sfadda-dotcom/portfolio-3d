@@ -56,7 +56,7 @@ export default async function StudioPage() {
               </h2>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-px bg-white/[0.08]">
                 {about.disciplines.map((d) => (
-                  <div key={d.name} className="bg-[#0a0a0a] p-6">
+                  <div key={d.name} className="bg-black p-6">
                     <h3 className="text-base font-light mb-3">{d.name}</h3>
                     <p className="text-sm text-white/50 leading-relaxed">{d.description}</p>
                   </div>

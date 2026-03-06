@@ -46,9 +46,9 @@ export default async function ProjectPage({ params }: { params: { slug: string }
               priority
             />
           ) : (
-            <div className="w-full h-full bg-neutral-900" />
+            <div className="w-full h-full bg-black" />
           )}
-          <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0a] via-transparent to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-t from-[#000000] via-transparent to-transparent" />
         </div>
       </section>
 

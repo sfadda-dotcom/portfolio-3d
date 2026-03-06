@@ -25,7 +25,7 @@ export default function ProjectSection({ project, index }: ProjectSectionProps) 
           transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
         >
           {/* Large image/video — near full viewport height */}
-          <div className="relative w-full overflow-hidden bg-neutral-900" style={{ height: '70vh' }}>
+          <div className="relative w-full overflow-hidden bg-black" style={{ height: '70vh' }}>
             {project.videoUrl ? (
               <iframe
                 src={`${project.videoUrl}?background=1&autoplay=1&loop=1&muted=1`}

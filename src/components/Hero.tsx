@@ -39,7 +39,7 @@ export default function Hero({ title, subtitle, videoUrl, image, showScrollIndic
             priority
           />
         ) : (
-          <div className="absolute inset-0 bg-gradient-to-b from-black via-neutral-950 to-black" />
+          <div className="absolute inset-0 bg-gradient-to-b from-black via-black to-black" />
         )}
       </div>
 
