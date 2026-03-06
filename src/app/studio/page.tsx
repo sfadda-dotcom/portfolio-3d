@@ -25,12 +25,26 @@ export default async function StudioPage() {
           <ScrollReveal>
             <section className="mb-28">
               <span className="section-number">001</span>
-              <p className="mt-4 text-2xl md:text-3xl font-extralight leading-relaxed text-white/90">
-                {about.introParagraph1}
-              </p>
-              <p className="mt-8 text-base text-white/50 leading-relaxed max-w-3xl">
-                {about.introParagraph2}
-              </p>
+              <div className="mt-4 flex flex-col md:flex-row gap-10 items-start">
+                <div className="flex-1">
+                  <p className="text-2xl md:text-3xl font-extralight leading-relaxed text-white/90">
+                    {about.introParagraph1}
+                  </p>
+                  <p className="mt-8 text-base text-white/50 leading-relaxed max-w-3xl">
+                    {about.introParagraph2}
+                  </p>
+                </div>
+                {about.profilePhoto && (
+                  <div className="w-48 md:w-64 flex-shrink-0">
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img
+                      src={about.profilePhoto}
+                      alt="Profile"
+                      className="w-full h-auto object-cover grayscale hover:grayscale-0 transition-all duration-700"
+                    />
+                  </div>
+                )}
+              </div>
             </section>
           </ScrollReveal>
 

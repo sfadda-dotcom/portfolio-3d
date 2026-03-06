@@ -23,6 +23,7 @@ export async function PUT(request: Request) {
     const settings: AboutSettings = {
       introParagraph1: body.introParagraph1 || DEFAULT_ABOUT.introParagraph1,
       introParagraph2: body.introParagraph2 || '',
+      profilePhoto: body.profilePhoto || null,
       disciplines: Array.isArray(body.disciplines) ? body.disciplines : DEFAULT_ABOUT.disciplines,
       software: Array.isArray(body.software) ? body.software : DEFAULT_ABOUT.software,
       experience: Array.isArray(body.experience) ? body.experience : DEFAULT_ABOUT.experience,

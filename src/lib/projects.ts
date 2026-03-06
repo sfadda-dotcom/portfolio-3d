@@ -42,6 +42,7 @@ export interface StudyItem {
 export interface AboutSettings {
   introParagraph1: string
   introParagraph2: string
+  profilePhoto: string | null
   disciplines: Discipline[]
   software: string[]
   experience: ExperienceItem[]
@@ -53,6 +54,7 @@ export const DEFAULT_ABOUT: AboutSettings = {
     'Toda nuestra vida es movimiento. Ni la sociedad, ni la naturaleza se quedan paradas en ningún momento. Todo se mueve y este movimiento tiene un fin.',
   introParagraph2:
     'Bajo las tres dimensiones que rigen el mundo físico, manipulamos la cuarta intangible, el tiempo. Creando así la ilusión de movimiento.',
+  profilePhoto: null,
   disciplines: [
     { name: '2D/3D Motion Graphics', description: 'Colors, shapes, textures and feelings — essential for communication.' },
     { name: 'Videomapping', description: 'Every place has a story, everything is a canvas to complete.' },

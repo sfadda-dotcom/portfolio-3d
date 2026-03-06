@@ -1,8 +1,8 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { useRouter } from 'next/navigation'
-import type { AboutSettings, Discipline, ExperienceItem, StudyItem } from '@/lib/projects'
+import type { AboutSettings, Discipline } from '@/lib/projects'
 
 export default function EditAbout() {
   const router = useRouter()
@@ -11,6 +11,8 @@ export default function EditAbout() {
   const [saving, setSaving] = useState(false)
   const [saved, setSaved] = useState(false)
   const [error, setError] = useState<string | null>(null)
+  const [uploading, setUploading] = useState(false)
+  const photoInputRef = useRef<HTMLInputElement>(null)
 
   useEffect(() => {
     async function load() {
@@ -53,9 +55,32 @@ export default function EditAbout() {
         setError(data.error || `Error al guardar (${res.status})`)
       }
     } catch {
-      setError('Error de red. Verifica que BLOB_READ_WRITE_TOKEN esté configurado.')
+      setError('Error de red. Verifica la configuración.')
     } finally {
       setSaving(false)
+    }
+  }
+
+  async function handlePhotoUpload(file: File) {
+    setUploading(true)
+    try {
+      const formData = new FormData()
+      formData.append('file', file)
+      const res = await fetch('/api/admin/upload', {
+        method: 'POST',
+        body: formData,
+      })
+      if (!res.ok) {
+        const data = await res.json().catch(() => ({}))
+        setError(data.error || 'Error al subir la foto')
+        return
+      }
+      const { url } = await res.json()
+      update({ profilePhoto: url })
+    } catch {
+      setError('Error de conexión al subir la foto')
+    } finally {
+      setUploading(false)
     }
   }
 
@@ -95,42 +120,6 @@ export default function EditAbout() {
     update({ software: settings.software.filter((_, i) => i !== index) })
   }
 
-  // Experience helpers
-  function updateExperience(index: number, field: keyof ExperienceItem, value: string) {
-    if (!settings) return
-    const updated = [...settings.experience]
-    updated[index] = { ...updated[index], [field]: value }
-    update({ experience: updated })
-  }
-
-  function addExperience() {
-    if (!settings) return
-    update({ experience: [...settings.experience, { company: '', role: '', period: '' }] })
-  }
-
-  function removeExperience(index: number) {
-    if (!settings) return
-    update({ experience: settings.experience.filter((_, i) => i !== index) })
-  }
-
-  // Studies helpers
-  function updateStudy(index: number, field: keyof StudyItem, value: string) {
-    if (!settings) return
-    const updated = [...settings.studies]
-    updated[index] = { ...updated[index], [field]: value }
-    update({ studies: updated })
-  }
-
-  function addStudy() {
-    if (!settings) return
-    update({ studies: [...settings.studies, { title: '', institution: '' }] })
-  }
-
-  function removeStudy(index: number) {
-    if (!settings) return
-    update({ studies: settings.studies.filter((_, i) => i !== index) })
-  }
-
   if (loading || !settings) {
     return (
       <div className="min-h-screen flex items-center justify-center">
@@ -165,6 +154,71 @@ export default function EditAbout() {
       </header>
 
       <main className="max-w-3xl mx-auto px-4 py-8 space-y-10">
+        {/* Profile Photo */}
+        <section>
+          <h2 className="text-xs tracking-[0.15em] uppercase text-white/40 mb-4">Foto personal</h2>
+          <div className="flex items-start gap-6">
+            <div className="relative group">
+              {settings.profilePhoto ? (
+                <div className="relative w-32 h-32 rounded-lg overflow-hidden bg-white/5">
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src={settings.profilePhoto}
+                    alt="Profile"
+                    className="w-full h-full object-cover"
+                  />
+                  <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100
+                                 flex items-center justify-center gap-2 transition-opacity">
+                    <button
+                      onClick={() => photoInputRef.current?.click()}
+                      className="text-[10px] bg-white text-black px-2 py-1 rounded"
+                    >
+                      Cambiar
+                    </button>
+                    <button
+                      onClick={() => update({ profilePhoto: null })}
+                      className="text-[10px] bg-red-500/80 text-white px-2 py-1 rounded"
+                    >
+                      Quitar
+                    </button>
+                  </div>
+                </div>
+              ) : (
+                <button
+                  onClick={() => photoInputRef.current?.click()}
+                  className="w-32 h-32 rounded-lg border-2 border-dashed border-white/10
+                             hover:border-white/20 flex items-center justify-center transition-colors"
+                >
+                  <span className="text-xs text-[#737373] text-center px-2">
+                    {uploading ? 'Subiendo...' : 'Subir foto'}
+                  </span>
+                </button>
+              )}
+              <input
+                ref={photoInputRef}
+                type="file"
+                accept="image/jpeg,image/png,image/webp,image/gif,.jpg,.jpeg,.png,.webp,.gif"
+                className="hidden"
+                onChange={(e) => {
+                  const file = e.target.files?.[0]
+                  if (file) handlePhotoUpload(file)
+                  e.target.value = ''
+                }}
+              />
+            </div>
+            <div className="flex-1">
+              <label className={labelClass}>...o pega una URL</label>
+              <input
+                type="url"
+                value={settings.profilePhoto || ''}
+                onChange={(e) => update({ profilePhoto: e.target.value || null })}
+                placeholder="https://..."
+                className={inputClass}
+              />
+            </div>
+          </div>
+        </section>
+
         {/* Intro */}
         <section>
           <h2 className="text-xs tracking-[0.15em] uppercase text-white/40 mb-4">Intro</h2>

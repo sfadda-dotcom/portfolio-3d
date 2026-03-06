@@ -1,7 +1,6 @@
 'use client'
 
 import { useState, useCallback, useEffect } from 'react'
-import Image from 'next/image'
 import type { GalleryItem } from '@/lib/projects'
 
 interface GalleryLightboxProps {
@@ -11,6 +10,33 @@ interface GalleryLightboxProps {
 
 function isGif(url: string): boolean {
   return url.toLowerCase().endsWith('.gif')
+}
+
+/** Build an embed URL with autoplay, mute, loop params */
+function embedUrl(item: GalleryItem): string {
+  const raw = item.url
+  if (item.type === 'youtube') {
+    const id = raw.includes('watch?v=')
+      ? raw.split('watch?v=')[1]?.split('&')[0]
+      : raw.split('/embed/')[1]?.split('?')[0] || raw
+    return `https://www.youtube.com/embed/${id}?autoplay=1&mute=1&loop=1&playlist=${id}&controls=0&showinfo=0&rel=0`
+  }
+  // Vimeo
+  const sep = raw.includes('?') ? '&' : '?'
+  return `${raw}${sep}background=1&autoplay=1&loop=1&muted=1`
+}
+
+/** Build a normal embed URL for lightbox (with controls) */
+function lightboxEmbedUrl(item: GalleryItem): string {
+  const raw = item.url
+  if (item.type === 'youtube') {
+    const id = raw.includes('watch?v=')
+      ? raw.split('watch?v=')[1]?.split('&')[0]
+      : raw.split('/embed/')[1]?.split('?')[0] || raw
+    return `https://www.youtube.com/embed/${id}?autoplay=1`
+  }
+  const sep = raw.includes('?') ? '&' : '?'
+  return `${raw}${sep}autoplay=1`
 }
 
 export default function GalleryLightbox({ items, projectTitle }: GalleryLightboxProps) {
@@ -54,7 +80,7 @@ export default function GalleryLightbox({ items, projectTitle }: GalleryLightbox
 
   return (
     <>
-      {/* Masonry gallery using CSS columns — no gaps between items */}
+      {/* Masonry gallery using CSS columns */}
       <div
         className="px-[var(--section-padding-x)]"
         style={{ columnCount: 2, columnGap: '12px' }}
@@ -67,42 +93,23 @@ export default function GalleryLightbox({ items, projectTitle }: GalleryLightbox
             onClick={() => openLightbox(index)}
           >
             {item.type === 'image' ? (
-              isGif(item.url) ? (
-                /* eslint-disable-next-line @next/next/no-img-element */
-                <img
-                  src={item.url}
-                  alt={item.caption || `${projectTitle} — ${index + 1}`}
-                  className="w-full h-auto block transition-transform duration-500 group-hover:scale-105"
-                />
-              ) : (
-                /* eslint-disable-next-line @next/next/no-img-element */
-                <img
-                  src={item.url}
-                  alt={item.caption || `${projectTitle} — ${index + 1}`}
-                  className="w-full h-auto block transition-transform duration-500 group-hover:scale-105"
-                />
-              )
+              /* eslint-disable-next-line @next/next/no-img-element */
+              <img
+                src={item.url}
+                alt={item.caption || `${projectTitle} — ${index + 1}`}
+                className="w-full h-auto block transition-transform duration-500 group-hover:scale-105"
+              />
             ) : (
+              /* Video embed — autoplay muted loop, no controls */
               <div className="relative w-full h-0 pb-[56.25%]">
                 <iframe
-                  src={
-                    item.type === 'youtube'
-                      ? item.url.replace('watch?v=', 'embed/')
-                      : item.url
-                  }
-                  className="absolute inset-0 w-full h-full"
+                  src={embedUrl(item)}
+                  className="absolute inset-0 w-full h-full pointer-events-none"
                   allow="autoplay; fullscreen; picture-in-picture"
                   style={{ border: 'none' }}
                 />
               </div>
             )}
-
-            {/* Hover overlay */}
-            <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-300 flex items-center justify-center">
-              <span className="text-white/0 group-hover:text-white/80 transition-colors text-xs tracking-[0.15em] uppercase">
-                {item.type === 'image' ? '⤢' : '▶'}
-              </span>
-            </div>
 
             {item.caption && (
               <p className="absolute bottom-0 left-0 right-0 px-3 py-2 text-[10px] text-white/50 bg-gradient-to-t from-black/60 to-transparent">
@@ -163,11 +170,7 @@ export default function GalleryLightbox({ items, projectTitle }: GalleryLightbox
             ) : (
               <div style={{ width: '80vw', height: '80vh' }}>
                 <iframe
-                  src={
-                    currentItem.type === 'youtube'
-                      ? currentItem.url.replace('watch?v=', 'embed/')
-                      : currentItem.url
-                  }
+                  src={lightboxEmbedUrl(currentItem)}
                   className="w-full h-full"
                   allow="autoplay; fullscreen; picture-in-picture"
                   style={{ border: 'none' }}
