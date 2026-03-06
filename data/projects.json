@@ -100,18 +100,7 @@
     "description": "",
     "thumbnail": "/uploads/1772466941142-xwjmis.jpeg",
     "videoUrl": null,
-    "gallery": [
-      {
-        "type": "vimeo",
-        "url": "https://player.vimeo.com/video/1171058070",
-        "caption": ""
-      },
-      {
-        "type": "vimeo",
-        "url": "https://player.vimeo.com/video/1171056652",
-        "caption": ""
-      }
-    ],
+    "gallery": [],
     "featured": false,
     "order": 1,
     "type": "project",
