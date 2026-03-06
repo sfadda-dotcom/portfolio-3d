@@ -1,5 +1,6 @@
 import { getProjects } from '@/lib/projects'
 import Footer from '@/components/Footer'
+import { seamlessEmbedUrl } from '@/lib/video-utils'
 
 export const metadata = {
   title: 'Reel',
@@ -26,11 +27,12 @@ export default async function ReelPage() {
               {reels.map((reel) => (
                 <article key={reel.id}>
                   {reel.videoUrl ? (
-                    <div className="aspect-video bg-neutral-900 overflow-hidden">
+                    <div className="relative w-full overflow-hidden" style={{ paddingBottom: '56.25%' }}>
                       <iframe
-                        src={reel.videoUrl}
-                        className="w-full h-full"
-                        allow="autoplay; fullscreen; picture-in-picture"
+                        src={seamlessEmbedUrl(reel.videoUrl)}
+                        className="absolute inset-0 w-full h-full"
+                        allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media"
+                        allowFullScreen
                         style={{ border: 'none' }}
                       />
                     </div>

@@ -2,6 +2,7 @@ import { notFound } from 'next/navigation'
 import Image from 'next/image'
 import Link from 'next/link'
 import { getProjectBySlug, getProjects } from '@/lib/projects'
+import { seamlessEmbedUrl } from '@/lib/video-utils'
 import Footer from '@/components/Footer'
 import GalleryLightbox from '@/components/GalleryLightbox'
 
@@ -114,11 +115,12 @@ export default async function ProjectPage({ params }: { params: { slug: string }
         <section className="pb-20 px-[var(--section-padding-x)]">
           <div className="max-w-6xl">
             <span className="section-number">003</span>
-            <div className="mt-4 aspect-video bg-neutral-900 overflow-hidden">
+            <div className="mt-4 relative w-full overflow-hidden" style={{ paddingBottom: '56.25%' }}>
               <iframe
-                src={project.videoUrl}
-                className="w-full h-full"
-                allow="autoplay; fullscreen; picture-in-picture"
+                src={seamlessEmbedUrl(project.videoUrl)}
+                className="absolute inset-0 w-full h-full"
+                allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media"
+                allowFullScreen
                 style={{ border: 'none' }}
               />
             </div>

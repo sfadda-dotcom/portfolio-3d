@@ -1,4 +1,5 @@
 import { getProjects } from '@/lib/projects'
+import { seamlessEmbedUrl } from '@/lib/video-utils'
 import Footer from '@/components/Footer'
 
 export const metadata = {
@@ -10,18 +11,6 @@ export const revalidate = 60
 
 function isGif(url: string): boolean {
   return url.toLowerCase().endsWith('.gif')
-}
-
-/** Build Vimeo/YouTube embed URL with autoplay, muted, loop */
-function autoplayUrl(url: string, type: 'vimeo' | 'youtube'): string {
-  if (type === 'youtube') {
-    const id = url.includes('watch?v=')
-      ? url.split('watch?v=')[1]?.split('&')[0]
-      : url.split('/embed/')[1]?.split('?')[0] || url
-    return `https://www.youtube.com/embed/${id}?autoplay=1&mute=1&loop=1&playlist=${id}&controls=0&showinfo=0&rel=0`
-  }
-  const sep = url.includes('?') ? '&' : '?'
-  return `${url}${sep}background=1&autoplay=1&loop=1&muted=1`
 }
 
 export default async function RDPage() {
@@ -41,18 +30,18 @@ export default async function RDPage() {
             <div className="space-y-6">
               {items.map((item) => {
                 const hasVideo = !!item.videoUrl
-                const isYoutube = item.videoUrl?.includes('youtube')
 
                 return (
                   <article key={item.id} className="group">
                     {/* Single media: video OR image/gif */}
-                    <div className="relative w-full overflow-hidden bg-neutral-900">
+                    <div className="relative w-full overflow-hidden">
                       {hasVideo ? (
-                        <div className="relative w-full h-0 pb-[56.25%]">
+                        <div className="relative w-full overflow-hidden" style={{ paddingBottom: '56.25%' }}>
                           <iframe
-                            src={autoplayUrl(item.videoUrl!, isYoutube ? 'youtube' : 'vimeo')}
+                            src={seamlessEmbedUrl(item.videoUrl!)}
                             className="absolute inset-0 w-full h-full"
-                            allow="autoplay; fullscreen; picture-in-picture"
+                            allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media"
+                            allowFullScreen
                             style={{ border: 'none' }}
                           />
                         </div>

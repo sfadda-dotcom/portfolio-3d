@@ -2,41 +2,11 @@
 
 import { useState, useCallback, useEffect } from 'react'
 import type { GalleryItem } from '@/lib/projects'
+import { seamlessEmbedUrl, interactiveEmbedUrl } from '@/lib/video-utils'
 
 interface GalleryLightboxProps {
   items: GalleryItem[]
   projectTitle: string
-}
-
-function isGif(url: string): boolean {
-  return url.toLowerCase().endsWith('.gif')
-}
-
-/** Build an embed URL with autoplay, mute, loop params */
-function embedUrl(item: GalleryItem): string {
-  const raw = item.url
-  if (item.type === 'youtube') {
-    const id = raw.includes('watch?v=')
-      ? raw.split('watch?v=')[1]?.split('&')[0]
-      : raw.split('/embed/')[1]?.split('?')[0] || raw
-    return `https://www.youtube.com/embed/${id}?autoplay=1&mute=1&loop=1&playlist=${id}&controls=0&showinfo=0&rel=0`
-  }
-  // Vimeo
-  const sep = raw.includes('?') ? '&' : '?'
-  return `${raw}${sep}background=1&autoplay=1&loop=1&muted=1`
-}
-
-/** Build a normal embed URL for lightbox (with controls) */
-function lightboxEmbedUrl(item: GalleryItem): string {
-  const raw = item.url
-  if (item.type === 'youtube') {
-    const id = raw.includes('watch?v=')
-      ? raw.split('watch?v=')[1]?.split('&')[0]
-      : raw.split('/embed/')[1]?.split('?')[0] || raw
-    return `https://www.youtube.com/embed/${id}?autoplay=1`
-  }
-  const sep = raw.includes('?') ? '&' : '?'
-  return `${raw}${sep}autoplay=1`
 }
 
 export default function GalleryLightbox({ items, projectTitle }: GalleryLightboxProps) {
@@ -88,7 +58,7 @@ export default function GalleryLightbox({ items, projectTitle }: GalleryLightbox
         {items.map((item, index) => (
           <div
             key={index}
-            className="cursor-pointer group relative overflow-hidden bg-neutral-900 mb-3"
+            className="cursor-pointer group relative overflow-hidden mb-3"
             style={{ breakInside: 'avoid' }}
             onClick={() => openLightbox(index)}
           >
@@ -100,12 +70,13 @@ export default function GalleryLightbox({ items, projectTitle }: GalleryLightbox
                 className="w-full h-auto block transition-transform duration-500 group-hover:scale-105"
               />
             ) : (
-              /* Video embed — autoplay muted loop, no controls */
-              <div className="relative w-full h-0 pb-[56.25%]">
+              /* Video embed — seamless autoplay muted loop, transparent bg */
+              <div className="relative w-full overflow-hidden" style={{ paddingBottom: '56.25%' }}>
                 <iframe
-                  src={embedUrl(item)}
+                  src={seamlessEmbedUrl(item.url)}
                   className="absolute inset-0 w-full h-full pointer-events-none"
-                  allow="autoplay; fullscreen; picture-in-picture"
+                  allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media"
+                  allowFullScreen
                   style={{ border: 'none' }}
                 />
               </div>
@@ -170,9 +141,10 @@ export default function GalleryLightbox({ items, projectTitle }: GalleryLightbox
             ) : (
               <div style={{ width: '80vw', height: '80vh' }}>
                 <iframe
-                  src={lightboxEmbedUrl(currentItem)}
+                  src={interactiveEmbedUrl(currentItem.url)}
                   className="w-full h-full"
-                  allow="autoplay; fullscreen; picture-in-picture"
+                  allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media"
+                  allowFullScreen
                   style={{ border: 'none' }}
                 />
               </div>
