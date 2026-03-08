@@ -85,7 +85,7 @@
         "caption": ""
       }
     ],
-    "featured": false,
+    "featured": true,
     "order": 2,
     "type": "project",
     "discipline": "",
