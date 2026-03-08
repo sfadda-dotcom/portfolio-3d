@@ -122,7 +122,7 @@
         "caption": ""
       }
     ],
-    "featured": false,
+    "featured": true,
     "order": 1,
     "type": "project",
     "discipline": "",
