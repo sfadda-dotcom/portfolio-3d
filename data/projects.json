@@ -260,5 +260,21 @@
     "discipline": "",
     "place": "",
     "date": ""
+  },
+  {
+    "id": "1773391883968",
+    "slug": "nuevo-test-mmonqn5s",
+    "title": "Nuevo test",
+    "category": "",
+    "description": "",
+    "thumbnail": "",
+    "videoUrl": null,
+    "gallery": [],
+    "featured": false,
+    "order": 3,
+    "type": "rd",
+    "discipline": "",
+    "place": "",
+    "date": ""
   }
 ]
