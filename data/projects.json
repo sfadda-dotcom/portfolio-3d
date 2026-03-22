@@ -276,5 +276,21 @@
     "discipline": "",
     "place": "",
     "date": ""
+  },
+  {
+    "id": "1774203055596",
+    "slug": "nuevo-reel",
+    "title": "Nuevo reel",
+    "category": "",
+    "description": "",
+    "thumbnail": "",
+    "videoUrl": null,
+    "gallery": [],
+    "featured": false,
+    "order": 1,
+    "type": "reel",
+    "discipline": "",
+    "place": "",
+    "date": ""
   }
 ]
