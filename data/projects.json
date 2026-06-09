@@ -86,7 +86,7 @@
       }
     ],
     "featured": false,
-    "order": 2,
+    "order": 3,
     "type": "project",
     "discipline": "",
     "place": "",
@@ -128,7 +128,7 @@
       }
     ],
     "featured": false,
-    "order": 1,
+    "order": 2,
     "type": "project",
     "discipline": "3D Ai",
     "place": "",
@@ -160,7 +160,7 @@
       }
     ],
     "featured": false,
-    "order": 3,
+    "order": 4,
     "type": "project",
     "discipline": "",
     "place": "",
@@ -197,7 +197,7 @@
       }
     ],
     "featured": false,
-    "order": 4,
+    "order": 5,
     "type": "project",
     "discipline": "",
     "place": "",
@@ -239,7 +239,7 @@
       }
     ],
     "featured": false,
-    "order": 5,
+    "order": 6,
     "type": "project",
     "discipline": "",
     "place": "",
@@ -303,7 +303,7 @@
     "videoUrl": null,
     "gallery": [],
     "featured": false,
-    "order": 6,
+    "order": 1,
     "type": "project",
     "discipline": "",
     "place": "",
