@@ -1,8 +1,8 @@
 [
   {
-    "id": "1772466323634",
-    "slug": "nuevo-test",
-    "title": "Nuevo test",
+    "id": "1774203055596",
+    "slug": "nuevo-reel",
+    "title": "Nuevo reel",
     "category": "",
     "description": "",
     "thumbnail": "",
@@ -10,6 +10,80 @@
     "gallery": [],
     "featured": false,
     "order": 1,
+    "type": "reel",
+    "discipline": "",
+    "place": "",
+    "date": ""
+  },
+  {
+    "id": "1781017683898",
+    "slug": "Gaudi-100",
+    "title": "Gaudí 100",
+    "category": "",
+    "description": "",
+    "thumbnail": "/uploads/1781017893182-m055qs.png",
+    "videoUrl": null,
+    "gallery": [],
+    "featured": false,
+    "order": 2,
+    "type": "project",
+    "discipline": "",
+    "place": "",
+    "date": "2026"
+  },
+  {
+    "id": "1772466477651",
+    "slug": "Corallium",
+    "title": "Corallium",
+    "category": "",
+    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum congue turpis sed erat finibus tincidunt. In hac habitasse platea dictumst. Donec a rhoncus urna. Cras luctus nunc ut leo faucibus, fringilla eleifend justo ullamcorper. Duis tempor bibendum tempus. Phasellus tortor elit, molestie ac leo in, accumsan malesuada ligula. Sed ornare magna purus, vel lobortis tellus fermentum ut. Aliquam justo purus, sollicitudin ac lectus commodo, aliquet feugiat odio.\n\nPhasellus accumsan a ligula a ultrices. In laoreet finibus velit, quis dignissim est tristique sed. Sed consequat lorem ac nisi accumsan, sit amet sodales libero rutrum. Proin vel sodales mauris. Suspendisse sed quam ligula. Maecenas mollis augue ac risus laoreet rhoncus. Duis fringilla elementum volutpat.\n",
+    "thumbnail": "/uploads/1772466941142-xwjmis.jpeg",
+    "videoUrl": null,
+    "gallery": [
+      {
+        "type": "vimeo",
+        "url": "https://player.vimeo.com/video/1171058070?autoplay=1&muted=1&loop=1",
+        "caption": ""
+      },
+      {
+        "type": "vimeo",
+        "url": "https://player.vimeo.com/video/1171061505?autoplay=1&muted=1&loop=1",
+        "caption": ""
+      },
+      {
+        "type": "vimeo",
+        "url": "https://player.vimeo.com/video/1171056652?autoplay=1&muted=1&loop=1",
+        "caption": ""
+      },
+      {
+        "type": "vimeo",
+        "url": "https://player.vimeo.com/video/1171146404",
+        "caption": ""
+      },
+      {
+        "type": "vimeo",
+        "url": "https://player.vimeo.com/video/1171524341",
+        "caption": ""
+      }
+    ],
+    "featured": false,
+    "order": 3,
+    "type": "project",
+    "discipline": "3D Ai",
+    "place": "",
+    "date": "2026"
+  },
+  {
+    "id": "1773391873304",
+    "slug": "nuevo-test-mmonqexk",
+    "title": "Nuevo test",
+    "category": "",
+    "description": "",
+    "thumbnail": "",
+    "videoUrl": null,
+    "gallery": [],
+    "featured": false,
+    "order": 4,
     "type": "rd",
     "discipline": "",
     "place": "",
@@ -86,53 +160,27 @@
       }
     ],
     "featured": false,
-    "order": 3,
+    "order": 5,
     "type": "project",
     "discipline": "",
     "place": "",
     "date": "2025"
   },
   {
-    "id": "1772466477651",
-    "slug": "Corallium",
-    "title": "Corallium",
+    "id": "1773391883968",
+    "slug": "nuevo-test-mmonqn5s",
+    "title": "Nuevo test",
     "category": "",
-    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum congue turpis sed erat finibus tincidunt. In hac habitasse platea dictumst. Donec a rhoncus urna. Cras luctus nunc ut leo faucibus, fringilla eleifend justo ullamcorper. Duis tempor bibendum tempus. Phasellus tortor elit, molestie ac leo in, accumsan malesuada ligula. Sed ornare magna purus, vel lobortis tellus fermentum ut. Aliquam justo purus, sollicitudin ac lectus commodo, aliquet feugiat odio.\n\nPhasellus accumsan a ligula a ultrices. In laoreet finibus velit, quis dignissim est tristique sed. Sed consequat lorem ac nisi accumsan, sit amet sodales libero rutrum. Proin vel sodales mauris. Suspendisse sed quam ligula. Maecenas mollis augue ac risus laoreet rhoncus. Duis fringilla elementum volutpat.\n",
-    "thumbnail": "/uploads/1772466941142-xwjmis.jpeg",
+    "description": "",
+    "thumbnail": "",
     "videoUrl": null,
-    "gallery": [
-      {
-        "type": "vimeo",
-        "url": "https://player.vimeo.com/video/1171058070?autoplay=1&muted=1&loop=1",
-        "caption": ""
-      },
-      {
-        "type": "vimeo",
-        "url": "https://player.vimeo.com/video/1171061505?autoplay=1&muted=1&loop=1",
-        "caption": ""
-      },
-      {
-        "type": "vimeo",
-        "url": "https://player.vimeo.com/video/1171056652?autoplay=1&muted=1&loop=1",
-        "caption": ""
-      },
-      {
-        "type": "vimeo",
-        "url": "https://player.vimeo.com/video/1171146404",
-        "caption": ""
-      },
-      {
-        "type": "vimeo",
-        "url": "https://player.vimeo.com/video/1171524341",
-        "caption": ""
-      }
-    ],
+    "gallery": [],
     "featured": false,
-    "order": 2,
-    "type": "project",
-    "discipline": "3D Ai",
+    "order": 6,
+    "type": "rd",
+    "discipline": "",
     "place": "",
-    "date": "2026"
+    "date": ""
   },
   {
     "id": "1772467059651",
@@ -160,7 +208,7 @@
       }
     ],
     "featured": false,
-    "order": 4,
+    "order": 7,
     "type": "project",
     "discipline": "",
     "place": "",
@@ -197,7 +245,7 @@
       }
     ],
     "featured": false,
-    "order": 5,
+    "order": 8,
     "type": "project",
     "discipline": "",
     "place": "",
@@ -239,74 +287,10 @@
       }
     ],
     "featured": false,
-    "order": 6,
+    "order": 9,
     "type": "project",
     "discipline": "",
     "place": "",
     "date": "2023"
-  },
-  {
-    "id": "1773391873304",
-    "slug": "nuevo-test-mmonqexk",
-    "title": "Nuevo test",
-    "category": "",
-    "description": "",
-    "thumbnail": "",
-    "videoUrl": null,
-    "gallery": [],
-    "featured": false,
-    "order": 2,
-    "type": "rd",
-    "discipline": "",
-    "place": "",
-    "date": ""
-  },
-  {
-    "id": "1773391883968",
-    "slug": "nuevo-test-mmonqn5s",
-    "title": "Nuevo test",
-    "category": "",
-    "description": "",
-    "thumbnail": "",
-    "videoUrl": null,
-    "gallery": [],
-    "featured": false,
-    "order": 3,
-    "type": "rd",
-    "discipline": "",
-    "place": "",
-    "date": ""
-  },
-  {
-    "id": "1774203055596",
-    "slug": "nuevo-reel",
-    "title": "Nuevo reel",
-    "category": "",
-    "description": "",
-    "thumbnail": "",
-    "videoUrl": null,
-    "gallery": [],
-    "featured": false,
-    "order": 1,
-    "type": "reel",
-    "discipline": "",
-    "place": "",
-    "date": ""
-  },
-  {
-    "id": "1781017683898",
-    "slug": "Gaudi-100",
-    "title": "Gaudí 100",
-    "category": "",
-    "description": "",
-    "thumbnail": "/uploads/1781017893182-m055qs.png",
-    "videoUrl": null,
-    "gallery": [],
-    "featured": false,
-    "order": 1,
-    "type": "project",
-    "discipline": "",
-    "place": "",
-    "date": "2026"
   }
 ]
