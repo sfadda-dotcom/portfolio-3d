@@ -167,22 +167,6 @@
     "date": "2025"
   },
   {
-    "id": "1773391883968",
-    "slug": "nuevo-test-mmonqn5s",
-    "title": "Nuevo test",
-    "category": "",
-    "description": "",
-    "thumbnail": "",
-    "videoUrl": null,
-    "gallery": [],
-    "featured": false,
-    "order": 6,
-    "type": "rd",
-    "discipline": "",
-    "place": "",
-    "date": ""
-  },
-  {
     "id": "1772467059651",
     "slug": "Montserrat",
     "title": "Montserrat",
@@ -208,7 +192,7 @@
       }
     ],
     "featured": false,
-    "order": 7,
+    "order": 6,
     "type": "project",
     "discipline": "",
     "place": "",
@@ -245,7 +229,7 @@
       }
     ],
     "featured": false,
-    "order": 8,
+    "order": 7,
     "type": "project",
     "discipline": "",
     "place": "",
@@ -287,7 +271,7 @@
       }
     ],
     "featured": false,
-    "order": 9,
+    "order": 8,
     "type": "project",
     "discipline": "",
     "place": "",
